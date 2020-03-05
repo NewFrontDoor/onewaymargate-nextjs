@@ -82,12 +82,7 @@ MapLayout.propTypes = {
   heading: PropTypes.string,
   details: PropTypes.array,
   location: PropTypes.object,
-  actions: PropTypes.arrayOf(
-    PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired
-    })
-  )
+  actions: PropTypes.array
 };
 
 export default MapLayout;

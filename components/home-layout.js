@@ -117,7 +117,7 @@ const HomeLayout = (props) => {
             >
               {actions.map((link, index) => (
                 <Action
-                  key={link}
+                  key={link.url}
                   link={link}
                   column={index + 2}
                   textColors={textColors}
@@ -140,11 +140,11 @@ HomeLayout.propTypes = {
       link: PropTypes.shape({
         url: PropTypes.string,
         label: PropTypes.string
-      }).isRequired
+      })
     })
   ).isRequired,
-  background: PropTypes.string,
-  blurb: PropTypes.object,
+  background: PropTypes.object,
+  blurb: PropTypes.array,
   firstpage: PropTypes.bool.isRequired,
   heading: PropTypes.string.isRequired,
   styling: PropTypes.object.isRequired

@@ -140,12 +140,24 @@ const InternalLink = ({url, children, column}) => {
   );
 };
 
+InternalLink.propTypes = {
+  children: PropTypes.node,
+  column: PropTypes.number.isRequired,
+  url: PropTypes.string.isRequired
+};
+
 const ExternalLink = ({url, children, column}) => {
   return (
     <ExtLink column={column} href={`${url}`}>
       {children}
     </ExtLink>
   );
+};
+
+ExternalLink.propTypes = {
+  children: PropTypes.node,
+  column: PropTypes.number.isRequired,
+  url: PropTypes.string.isRequired
 };
 
 const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/;
@@ -204,7 +216,7 @@ const MapOverlay = ({heading, details, actions, lat, long}) => {
 MapOverlay.propTypes = {
   actions: PropTypes.array.isRequired,
   details: PropTypes.array.isRequired,
-  heading: PropTypes.string.isRequired,
+  heading: PropTypes.string,
   lat: PropTypes.number.isRequired,
   long: PropTypes.number.isRequired
 };

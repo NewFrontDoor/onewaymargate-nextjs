@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/header/header';
 import Footer from '../components/footer/footer';
 import {fetchQuery} from '../lib/sanity';
-import HomeLayout from '../components/home-segment';
+import HomeLayout from '../components/home-layout';
 import MapLayout from '../components/map/map-layout';
 import {mainQuery, menuQuery} from '../lib/queries';
 

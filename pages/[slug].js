@@ -34,8 +34,8 @@ const Page = ({menuData, mainData}) => {
 };
 
 Page.propTypes = {
-  menuData: PropTypes.object.isRequired,
-  mainData: PropTypes.object.isRequired
+  mainData: PropTypes.object.isRequired,
+  menuData: PropTypes.object.isRequired
 };
 
 Page.getInitialProps = async ({query}) => {

@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import {jsx, Styled} from 'theme-ui';
 import {readableColor} from 'polished';
 import urlFor from '../lib/sanityImg';
+import PropTypes from 'prop-types';
 
 const BannerImage = styled('div')`
   opacity: ${props => (props.image ? '0.25' : '0')};
@@ -19,7 +20,7 @@ const BannerImage = styled('div')`
 export default function Banner({data: {mainImage, title}}) {
   return (
     <div sx={{position: 'relative', backgroundColor: '#4c516d'}}>
-      <BannerImage image={mainImage || null} />
+      <BannerImage image={mainImage} />
       <div
         sx={{
           display: 'table',
@@ -36,3 +37,16 @@ export default function Banner({data: {mainImage, title}}) {
     </div>
   );
 }
+
+Banner.propTypes = {
+  data: PropTypes.shape({
+    mainImage: PropTypes.any,
+    title: PropTypes.string.isRequired
+  })
+};
+
+Banner.defaultProps = {
+  data: {
+    mainImage: null
+  }
+};

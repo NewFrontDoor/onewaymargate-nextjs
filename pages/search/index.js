@@ -125,8 +125,8 @@ const Search = ({pageData, menuData}) => {
 };
 
 Search.propTypes = {
-  pageData: PropTypes.object,
-  menuData: PropTypes.object
+  menuData: PropTypes.object.isRequired,
+  pageData: PropTypes.object.isRequired
 };
 
 Search.getInitialProps = async () => {

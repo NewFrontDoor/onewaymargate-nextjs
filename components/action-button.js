@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
@@ -55,9 +56,25 @@ export default function Action(props) {
   } = props;
   return (
     <Link href={`/${url}`}>
-      <ActionStyles key={label} column {...props}>
+      <ActionStyles key={label} column={column} {...props}>
         {label}
       </ActionStyles>
     </Link>
   );
 }
+
+Action.propTypes = {
+  column: PropTypes.number,
+  link: PropTypes.shape({
+    url: PropTypes.string,
+    label: PropTypes.string
+  })
+};
+
+Action.defaultProps = {
+  column: 1,
+  link: {
+    url: '404',
+    label: null
+  }
+};

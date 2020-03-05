@@ -16,5 +16,7 @@ export default function Layout({menuData, mainData, children}) {
 }
 
 Layout.propTypes = {
+  menuData: PropTypes.object.isRequired,
+  mainData: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired
 };

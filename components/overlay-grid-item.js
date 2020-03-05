@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import urlFor from '../lib/sanityImg';
+import PropTypes from 'prop-types';
 
 const Header = styled('h5')`
   grid-column: 1/1;
@@ -47,3 +48,13 @@ export default function Overlay({header, image, link}) {
     </Wrapper>
   );
 }
+
+Overlay.propTypes = {
+  header: PropTypes.string.isRequired,
+  image: PropTypes.any,
+  link: PropTypes.string.isRequired
+};
+
+Overlay.defaultProps = {
+  image: null
+};

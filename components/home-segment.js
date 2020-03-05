@@ -117,6 +117,7 @@ export default function HomeLayout(props) {
             >
               {actions.map((link, index) => (
                 <Action
+                  key={link}
                   link={link}
                   column={index + 2}
                   textColors={textColors}
@@ -134,12 +135,17 @@ export default function HomeLayout(props) {
 }
 
 HomeLayout.propTypes = {
-  heading: PropTypes.string.isRequired,
-  blurb: PropTypes.string,
   actions: PropTypes.arrayOf(
     PropTypes.shape({
-      text: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired
+      link: PropTypes.shape({
+        url: PropTypes.string,
+        label: PropTypes.string
+      }).isRequired
     })
-  ).isRequired
+  ).isRequired,
+  background: PropTypes.string,
+  blurb: PropTypes.object,
+  firstpage: PropTypes.bool.isRequired,
+  heading: PropTypes.string.isRequired,
+  styling: PropTypes.object.isRequired
 };

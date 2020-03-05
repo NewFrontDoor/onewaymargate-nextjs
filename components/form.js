@@ -59,7 +59,9 @@ const getFormField = field => {
           <Label htmlFor={field.id}>{field.label}</Label>
           <Select id={field.id} name={field.label}>
             {field.values.map(value => (
-              <option value={value}>{value}</option>
+              <option key={value} value={value}>
+                {value}
+              </option>
             ))}
           </Select>
         </div>
@@ -108,7 +110,9 @@ export default function Form({title, id, description, fields}) {
           {fields.map(field => {
             return getFormField(field);
           })}
-          <Button className="fullwidth" type="submit" value="Submit">Submit</Button>
+          <Button className="fullwidth" type="submit" value="Submit">
+            Submit
+          </Button>
         </Grid>
       </fieldset>
     </form>

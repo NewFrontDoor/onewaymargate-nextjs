@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from '@emotion/styled';
-import Link from 'next/link'
+import Link from 'next/link';
 
 const Wrapper = styled('div')`
   display: grid;
@@ -25,7 +26,7 @@ export default function Results({data, searchArray}) {
     <Wrapper>
       <ul>
         {searchArray.map(item => (
-          <li>{item}</li>
+          <li key={item}>{item}</li>
         ))}
       </ul>
       {data.map(item => {
@@ -45,3 +46,14 @@ export default function Results({data, searchArray}) {
     </Wrapper>
   );
 }
+
+Results.propTypes = {
+  searchArray: PropTypes.arrayOf(PropTypes.string),
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      body: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired
+    })
+  )
+};

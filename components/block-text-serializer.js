@@ -9,6 +9,7 @@ import GridBlock from './grid-block';
 import Card from './card-grid-item';
 import HorizontalCard from './horizontal-card-grid-item';
 import Overlay from './overlay-grid-item';
+import PropTypes from 'prop-types';
 
 const BlockContentInt = styled(BlockContent)(`line-height: 26px;`);
 
@@ -106,3 +107,7 @@ export default function BlockText({blocks}) {
     />
   );
 }
+
+BlockText.propTypes = {
+  blocks: PropTypes.object.isRequired
+};

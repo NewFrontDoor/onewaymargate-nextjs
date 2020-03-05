@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from '@emotion/styled';
-import Link from 'next/link'
+import Link from 'next/link';
 
 const ListItem = styled('li')`
   position: relative;
@@ -58,20 +59,12 @@ const ChildItem = styled('li')`
 export default function Navparent({link, text, childpages}) {
   return (
     <ListItem>
-      <Anchor
-        href={`/${link}`}
-      >
-        {text}
-      </Anchor>
+      <Anchor href={`/${link}`}>{text}</Anchor>
       <Submenu>
         {childpages.map(child => {
           return (
-            <ChildItem>
-              <Anchor
-                href={`/${child.slug.current}`}
-              >
-                {child.title}
-              </Anchor>
+            <ChildItem key={child.slug.current}>
+              <Anchor href={`/${child.slug.current}`}>{child.title}</Anchor>
             </ChildItem>
           );
         })}
@@ -79,3 +72,14 @@ export default function Navparent({link, text, childpages}) {
     </ListItem>
   );
 }
+
+Navparent.propTypes = {
+  childpages: PropTypes.arrayOf(
+    PropTypes.shape({
+      slug: PropTypes.shape({current: PropTypes.string.isRequired}),
+      title: PropTypes.string.isRequired
+    })
+  ),
+  link: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired
+};

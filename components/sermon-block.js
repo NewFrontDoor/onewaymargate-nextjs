@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from '@emotion/styled';
 import placeholder from '../static/placeholder-800x200.jpg';
@@ -65,3 +66,19 @@ export default function SermonBlock({title, date, preacher, series, book}) {
     </SermonOuter>
   );
 }
+
+SermonBlock.propTypes = {
+  book: PropTypes.string,
+  date: PropTypes.string,
+  preacher: PropTypes.string,
+  series: PropTypes.string,
+  title: PropTypes.string
+};
+
+SermonBlock.defaultProps = {
+  book: null,
+  date: null,
+  preacher: null,
+  series: null,
+  title: null
+};

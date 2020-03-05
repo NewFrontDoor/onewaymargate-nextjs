@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from '@emotion/styled';
-import Link from 'next/link'
+import Link from 'next/link';
 import BlockContent from '@sanity/block-content-to-react';
 import urlFor from '../lib/sanityImg';
 
@@ -21,13 +22,13 @@ const Header = styled('h3')`
 
 const Image = styled.img``;
 
-function CustomStyleSerializer({children}) {
+const CustomStyleSerializer = ({children}) => {
   return <p>{children}</p>;
-}
+};
 
-function AnchorSerializer({children, mark}) {
+const AnchorSerializer = ({children, mark}) => {
   return <span id={mark.id}>{children}</span>;
-}
+};
 
 const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/;
 
@@ -80,11 +81,15 @@ export default function HorizontalCard({
           <Header>{header || title}</Header>
         ) : regex.test(link || slug) ? (
           <Link href={`/${link || slug.current}`}>
-            <Header style={{textDecoration: 'underline'}}>{header || title}</Header>
+            <Header style={{textDecoration: 'underline'}}>
+              {header || title}
+            </Header>
           </Link>
         ) : (
           <a href={link}>
-            <Header  style={{textDecoration: 'underline'}}>{header || title}</Header>
+            <Header style={{textDecoration: 'underline'}}>
+              {header || title}
+            </Header>
           </a>
         )}
         {description && (
@@ -105,3 +110,21 @@ export default function HorizontalCard({
     </Wrapper>
   );
 }
+
+HorizontalCard.propTypes = {
+  description: PropTypes.object,
+  header: PropTypes.string.isRequired,
+  image: PropTypes.any,
+  link: PropTypes.string.isRequired,
+  mainImage: PropTypes.any,
+  shortdescription: PropTypes.string,
+  slug: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
+};
+
+HorizontalCard.defaultProps = {
+  description: null,
+  image: null,
+  mainImage: null,
+  shortdescription: null
+};

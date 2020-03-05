@@ -5,7 +5,7 @@ import Footer from '../components/footer/footer';
 import {fetchQuery} from '../lib/sanity';
 import HomeLayout from '../components/home-segment';
 import MapLayout from '../components/map/map-layout';
-import {mainQuery, menuQuery} from '../lib/queries'
+import {mainQuery, menuQuery} from '../lib/queries';
 
 const Home = ({mainData, menuData}) => {
   const {content} = mainData;
@@ -17,7 +17,13 @@ const Home = ({mainData, menuData}) => {
           return <MapLayout {...segment} />;
         }
 
-        return <HomeLayout {...segment} firstpage={index === 0} />;
+        return (
+          <HomeLayout
+            key={segment.heading}
+            {...segment}
+            firstpage={index === 0}
+          />
+        );
       })}
       <Footer />
     </div>

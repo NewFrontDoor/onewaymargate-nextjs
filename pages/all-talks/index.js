@@ -7,12 +7,7 @@ import {SearchCollection as SermonFilter} from '@newfrontdoor/search';
 import HomeBlock from '../../components/block-text-serializer';
 import Layout from '../../components/layout';
 import {fetchQuery} from '../../lib/sanity';
-import {
-  pageQuery,
-  menuQuery,
-  sermonQuery,
-  seriesQuery
-} from '../../lib/queries';
+import {pageQuery, menuQuery, sermonQuery} from '../../lib/queries';
 
 const headers = [
   {heading: 'Title', key: 'title', searchable: true},
@@ -30,12 +25,7 @@ const Main = styled('article')`
   color: #444444;
 `;
 
-export default function AllSermons({
-  pageData,
-  menuData,
-  sermonData,
-  seriesData
-}) {
+export default function AllSermons({pageData, menuData, sermonData}) {
   const [sermonsSubset, setSubset] = useState(sermonData);
 
   return (
@@ -67,8 +57,9 @@ export default function AllSermons({
 }
 
 AllSermons.propTypes = {
-  slug: PropTypes.string.isRequired,
-  pageData: PropTypes.array
+  pageData: PropTypes.object.isRequired,
+  menuData: PropTypes.object.isRequired,
+  sermonData: PropTypes.array
 };
 
 AllSermons.getInitialProps = async () => {
@@ -76,8 +67,7 @@ AllSermons.getInitialProps = async () => {
     `{
         "menuData": ${menuQuery},
         "pageData": ${pageQuery('all-talks')},
-        "sermonData": ${sermonQuery},
-        "seriesData": ${seriesQuery}
+        "sermonData": ${sermonQuery}
     }`
   );
   return results;

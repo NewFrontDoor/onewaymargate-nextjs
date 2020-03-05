@@ -1,9 +1,9 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
   RenderSeriesComponent,
   CurrentSeries,
-  RecentSeries,
-  FeaturedSeries
+  RecentSeries
 } from '@newfrontdoor/sermon';
 import imageUrlBuilder from '@sanity/image-url';
 import styled from '@emotion/styled';
@@ -39,7 +39,7 @@ function urlFor(source) {
   return builder.image(source);
 }
 
-export default function SermonGrid({sermons, series, def}) {
+export default function SermonGrid({sermons, series}) {
   const latestSermon = {
     ...sermons[0],
     link: `talks/${sermons[0].slug}`,
@@ -74,3 +74,8 @@ export default function SermonGrid({sermons, series, def}) {
     </Grid>
   );
 }
+
+SermonGrid.propTypes = {
+  series: PropTypes.array,
+  sermons: PropTypes.array
+};

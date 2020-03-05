@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, {useState} from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
@@ -54,7 +55,7 @@ const Vis = styled('div')`
   }
 `;
 
-export default function Navigation({navlinks, offset}) {
+export default function Navigation({navlinks}) {
   const [isOpen, setOpen] = useState(false);
   function handleClick() {
     setOpen(!isOpen);
@@ -105,3 +106,12 @@ export default function Navigation({navlinks, offset}) {
     </>
   );
 }
+
+Navigation.propTypes = {
+  navlinks: PropTypes.arrayOf(
+    PropTypes.shape({
+      childpages: PropTypes.array.isRequired,
+      text: PropTypes.string.isRequired
+    })
+  )
+};

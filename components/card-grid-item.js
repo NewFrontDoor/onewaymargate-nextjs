@@ -1,7 +1,8 @@
 /** @jsx jsx */
+import PropTypes from 'prop-types';
 import {css, jsx} from '@emotion/core';
 import styled from '@emotion/styled';
-import Link from 'next/link'
+import Link from 'next/link';
 import urlFor from '../lib/sanityImg';
 import BlockText from './block-text-serializer';
 
@@ -54,21 +55,21 @@ const Image = styled.img`
   width: 100%;
 `;
 
-function InternalLink({url, children}) {
+const InternalLink = ({url, children}) => {
   return (
     <Link css={action} href={`/${url}`}>
       {children}
     </Link>
   );
-}
+};
 
-function ExternalLink({url, children}) {
+const ExternalLink = ({url, children}) => {
   return (
     <a css={action} href={`${url}`}>
       {children}
     </a>
   );
-}
+};
 
 const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/;
 
@@ -104,16 +105,26 @@ export default function Card({header, description, image, link, action}) {
       {link && (
         <Actions>
           {regex.test(link) ? (
-            <InternalLink url={link}>
-              {action ? action : 'VIEW PAGE'}
-            </InternalLink>
+            <InternalLink url={link}>{action}</InternalLink>
           ) : (
-            <ExternalLink url={link}>
-              {action ? action : 'VIEW PAGE'}
-            </ExternalLink>
+            <ExternalLink url={link}>{action}</ExternalLink>
           )}
         </Actions>
       )}
     </div>
   );
 }
+
+Card.propTypes = {
+  action: PropTypes.string,
+  description: PropTypes.object,
+  header: PropTypes.string.isRequired,
+  image: PropTypes.any,
+  link: PropTypes.string.isRequired
+};
+
+Card.defaultProps = {
+  action: 'VIEW PAGE',
+  description: null,
+  image: null
+};

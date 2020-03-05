@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import styled from '@emotion/styled';
 
@@ -5,7 +6,7 @@ const Grid = styled('div')`
   display: grid;
   grid-template-columns: ${props => props.columns};
   grid-template-rows: auto;
-  gap: ${props => (props.gap ? props.gap : `5%`)};
+  gap: ${props => props.gap};
   @media (min-width: 450px) and (max-width: 890px) {
     grid-template-columns: ${props =>
       `repeat(${Math.round(props.columnRawValue / 2)}, 1fr)`};
@@ -15,7 +16,7 @@ const Grid = styled('div')`
 const ItemOuter = styled('div')`
   display: grid;
   grid-template-columns: 1fr;
-  margin-bottom: ${props => (props.marginBottom ? props.marginBottom : `4em`)};
+  margin-bottom: ${props => props.marginBottom};
 `;
 
 export default function GridBlock(props) {
@@ -42,3 +43,23 @@ export default function GridBlock(props) {
     </Grid>
   );
 }
+
+GridBlock.propTypes = {
+  columnRawValue: PropTypes.number.isRequired,
+  columns: PropTypes.number.isRequired,
+  gap: PropTypes.number,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired
+    })
+  ),
+  marginBottom: PropTypes.string,
+  renderProp: PropTypes.func.isRequired,
+  style: PropTypes.string.isRequired
+};
+
+GridBlock.defaultProps = {
+  gap: '5%',
+  marginBottom: '4em'
+};

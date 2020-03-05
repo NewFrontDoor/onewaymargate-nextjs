@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import PropTypes from 'prop-types';
 import {jsx} from 'theme-ui';
 import styled from '@emotion/styled';
 import Link from 'next/link';
@@ -51,6 +52,15 @@ const Header = ({navlinks}) => {
       </NavInner>
     </Nav>
   );
+};
+
+Header.propTypes = {
+  navlinks: PropTypes.arrayOf(
+    PropTypes.shape({
+      childpages: PropTypes.array.isRequired,
+      text: PropTypes.string.isRequired
+    })
+  )
 };
 
 export default Header;

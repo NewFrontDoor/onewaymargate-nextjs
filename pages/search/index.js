@@ -61,15 +61,15 @@ async function retrieveIndexes(url) {
         field: ['title', 'searchbody']
       });
 
-      // Const sermonResults = await sermonflex.search({
-      //   query: filter,
-      //   limit: 10,
-      //   threshold: 5,
-      //   depth: 3,
-      //   field: ['title', 'preacher', 'book', 'series']
-      // });
+      const sermonResults = await sermonflex.search({
+        query: filter,
+        limit: 10,
+        threshold: 5,
+        depth: 3,
+        field: ['title', 'preacher', 'book', 'series']
+      });
 
-      const results = searchResults; // .concat(sermonResults);
+      const results = searchResults.concat(sermonResults);
 
       return results;
     }

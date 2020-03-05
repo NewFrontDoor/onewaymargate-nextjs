@@ -93,18 +93,14 @@ async function fetchMainData() {
 export default async (req, res) => {
   const sermonIndex = await fetchSermonData();
   await sermonflex.add(sermonIndex);
-  const exportSermonData = await flex.export();
+  const exportSermonData = await sermonflex.export();
 
   const mainIndex = await fetchMainData();
   await flex.add(mainIndex);
   const exportData = await flex.export();
 
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.end(
-    JSON.stringify({
-      sermonIndexExport: exportSermonData,
-      mainIndexExport: exportData
-    })
-  );
+  res.status(200).json({
+    sermonIndexExport: exportSermonData,
+    mainIndexExport: exportData
+  });
 };

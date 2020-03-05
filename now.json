@@ -1,6 +1,6 @@
 {
   "name": "onewaymargate-org",
-  "version": "2",
+  "version": 2,
   "build": {
     "env": {
       "GOOGLE_MAPS_API": "@onewaymargate-org-google-maps-api"

@@ -1,0 +1,20 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import Header from './header/header';
+import Banner from './banner';
+import Footer from './footer/footer';
+
+export default function Layout({menuData, mainData, children}) {
+  return (
+    <div>
+      <Header navlinks={menuData.menuitems} />
+      <Banner data={mainData} />
+      {children}
+      <Footer />
+    </div>
+  );
+}
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired
+};

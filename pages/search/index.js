@@ -61,7 +61,7 @@ async function retrieveIndexes(url) {
         field: ['title', 'searchbody']
       });
 
-      // const sermonResults = await sermonflex.search({
+      // Const sermonResults = await sermonflex.search({
       //   query: filter,
       //   limit: 10,
       //   threshold: 5,
@@ -77,7 +77,7 @@ async function retrieveIndexes(url) {
 }
 
 function useSearchIndex(filter) {
-  const {data: index} = useQuery('/api/searchindex', retrieveIndexes);
+  const {data: index} = useQuery('api/searchindex', retrieveIndexes);
   const {data: results} = useQuery(filter, filter => {
     if (index) {
       return index.query(filter);

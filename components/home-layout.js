@@ -88,7 +88,7 @@ const HomeSectionInner = styled('div')`
   vertical-align: middle;
 `;
 
-export default function HomeLayout(props) {
+const HomeLayout = (props) => {
   const {heading, blurb, actions, background, styling, firstpage} = props;
   const displayActions = actions.length > 0;
   const [fade, set] = useSpring(() => ({opacity: 0, config: {duration: 500}}));
@@ -149,3 +149,5 @@ HomeLayout.propTypes = {
   heading: PropTypes.string.isRequired,
   styling: PropTypes.object.isRequired
 };
+
+export default HomeLayout;

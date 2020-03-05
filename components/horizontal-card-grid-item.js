@@ -32,7 +32,7 @@ const AnchorSerializer = ({children, mark}) => {
 
 const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/;
 
-export default function HorizontalCard({
+const HorizontalCard = ({
   header,
   title,
   description,
@@ -41,7 +41,7 @@ export default function HorizontalCard({
   mainImage,
   link,
   slug
-}) {
+}) => {
   return (
     <Wrapper>
       {!link && !slug ? (
@@ -128,3 +128,5 @@ HorizontalCard.defaultProps = {
   mainImage: null,
   shortdescription: null
 };
+
+export default HorizontalCard;

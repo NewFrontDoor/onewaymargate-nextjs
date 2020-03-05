@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import PropTypes from 'prop-types';
 import {css, jsx} from '@emotion/core';
 import styled from '@emotion/styled';
 import Link from 'next/link';
@@ -131,7 +132,7 @@ const types = {
   email: <EmailIcon width="25px" />
 };
 
-let InternalLink = ({url, children, column}) => {
+const InternalLink = ({url, children, column}) => {
   return (
     <Link href={`/${url}`}>
       <IntLink column={column}>{children}</IntLink>
@@ -139,7 +140,7 @@ let InternalLink = ({url, children, column}) => {
   );
 };
 
-let ExternalLink = ({url, children, column}) => {
+const ExternalLink = ({url, children, column}) => {
   return (
     <ExtLink column={column} href={`${url}`}>
       {children}
@@ -149,7 +150,7 @@ let ExternalLink = ({url, children, column}) => {
 
 const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/;
 
-export default function MapOverlay({heading, details, actions, lat, long}) {
+const MapOverlay = ({heading, details, actions, lat, long}) => {
   return (
     <Overlay>
       {heading ? <HeadingH2>{heading}</HeadingH2> : ''}
@@ -187,7 +188,7 @@ export default function MapOverlay({heading, details, actions, lat, long}) {
             }
 
             return (
-              <ExternalLink column={index} url={link.url}>
+              <ExternalLink key={link.url} column={index} url={link.url}>
                 {link.label}
               </ExternalLink>
             );
@@ -198,4 +199,14 @@ export default function MapOverlay({heading, details, actions, lat, long}) {
       )}
     </Overlay>
   );
-}
+};
+
+MapOverlay.propTypes = {
+  actions: PropTypes.array.isRequired,
+  details: PropTypes.array.isRequired,
+  heading: PropTypes.string.isRequired,
+  lat: PropTypes.number.isRequired,
+  long: PropTypes.number.isRequired
+};
+
+export default MapOverlay;

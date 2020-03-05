@@ -73,7 +73,7 @@ const ExternalLink = ({url, children}) => {
 
 const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/;
 
-export default function Card({header, description, image, link, action}) {
+const Card = ({header, description, image, link, action}) => {
   return (
     <div>
       {regex.test(link) ? (
@@ -128,3 +128,5 @@ Card.defaultProps = {
   description: null,
   image: null
 };
+
+export default Card;

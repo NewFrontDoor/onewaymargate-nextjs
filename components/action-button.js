@@ -49,7 +49,7 @@ const ActionStyles = styled('div')`
   }
 `;
 
-export default function Action(props) {
+const Action = props => {
   const {
     link: {url, label},
     column
@@ -61,7 +61,7 @@ export default function Action(props) {
       </ActionStyles>
     </Link>
   );
-}
+};
 
 Action.propTypes = {
   column: PropTypes.number,
@@ -78,3 +78,5 @@ Action.defaultProps = {
     label: null
   }
 };
+
+export default Action;

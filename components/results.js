@@ -21,7 +21,7 @@ const Preview = styled('p')`
   text-overflow: ellipsis;
 `;
 
-export default function Results({data, searchArray}) {
+const Results = ({data, searchArray}) => {
   return (
     <Wrapper>
       <ul>
@@ -57,3 +57,5 @@ Results.propTypes = {
     })
   )
 };
+
+export default Results;

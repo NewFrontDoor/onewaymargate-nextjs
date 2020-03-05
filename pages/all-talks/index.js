@@ -25,7 +25,7 @@ const Main = styled('article')`
   color: #444444;
 `;
 
-export default function AllSermons({pageData, menuData, sermonData}) {
+const AllSermons = ({pageData, menuData, sermonData}) => {
   const [sermonsSubset, setSubset] = useState(sermonData);
 
   return (
@@ -72,3 +72,5 @@ AllSermons.getInitialProps = async () => {
   );
   return results;
 };
+
+export default AllSermons;

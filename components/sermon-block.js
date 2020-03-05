@@ -46,7 +46,7 @@ const Actions = styled('section')`
   }
 `;
 
-export default function SermonBlock({title, date, preacher, series, book}) {
+const SermonBlock = ({title, date, preacher, series, book}) => {
   return (
     <SermonOuter>
       <div>
@@ -82,3 +82,5 @@ SermonBlock.defaultProps = {
   series: null,
   title: null
 };
+
+export default SermonBlock;

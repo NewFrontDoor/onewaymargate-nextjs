@@ -8,7 +8,7 @@ const Sermons = styled('div')`
   grid-template-columns: 1fr 1fr;
 `;
 
-export default function SermonLayout({sermons}) {
+const SermonLayout = ({sermons}) => {
   return (
     <Sermons>
       {sermons.map(sermon => (
@@ -36,3 +36,5 @@ SermonLayout.propTypes = {
     })
   ).isRequired
 };
+
+export default SermonLayout;

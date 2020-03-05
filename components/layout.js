@@ -4,7 +4,7 @@ import Header from './header/header';
 import Banner from './banner';
 import Footer from './footer/footer';
 
-export default function Layout({menuData, mainData, children}) {
+const Layout = ({menuData, mainData, children}) => {
   return (
     <div>
       <Header navlinks={menuData.menuitems} />
@@ -20,3 +20,5 @@ Layout.propTypes = {
   mainData: PropTypes.object.isRequired,
   children: PropTypes.node.isRequired
 };
+
+export default Layout;

@@ -19,7 +19,7 @@ const ItemOuter = styled('div')`
   margin-bottom: ${props => props.marginBottom};
 `;
 
-export default function GridBlock(props) {
+const GridBlock = props => {
   const {
     items,
     columns,
@@ -42,7 +42,7 @@ export default function GridBlock(props) {
       })}
     </Grid>
   );
-}
+};
 
 GridBlock.propTypes = {
   columnRawValue: PropTypes.number.isRequired,
@@ -63,3 +63,5 @@ GridBlock.defaultProps = {
   gap: '5%',
   marginBottom: '4em'
 };
+
+export default GridBlock;

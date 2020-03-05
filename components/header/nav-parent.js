@@ -56,7 +56,7 @@ const ChildItem = styled('li')`
   padding-bottom: 0.5rem;
 `;
 
-export default function Navparent({link, text, childpages}) {
+const Navparent = ({link, text, childpages}) => {
   return (
     <ListItem>
       <Anchor href={`/${link}`}>{text}</Anchor>
@@ -71,7 +71,7 @@ export default function Navparent({link, text, childpages}) {
       </Submenu>
     </ListItem>
   );
-}
+};
 
 Navparent.propTypes = {
   childpages: PropTypes.arrayOf(
@@ -83,3 +83,5 @@ Navparent.propTypes = {
   link: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired
 };
+
+export default Navparent;

@@ -39,7 +39,7 @@ function urlFor(source) {
   return builder.image(source);
 }
 
-export default function SermonGrid({sermons, series}) {
+const SermonGrid = ({sermons, series}) => {
   const latestSermon = {
     ...sermons[0],
     link: `talks/${sermons[0].slug}`,
@@ -79,3 +79,5 @@ SermonGrid.propTypes = {
   series: PropTypes.array,
   sermons: PropTypes.array
 };
+
+export default SermonGrid;

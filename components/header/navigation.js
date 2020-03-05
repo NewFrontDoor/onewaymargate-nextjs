@@ -55,7 +55,7 @@ const Vis = styled('div')`
   }
 `;
 
-export default function Navigation({navlinks}) {
+const Navigation = ({navlinks}) => {
   const [isOpen, setOpen] = useState(false);
   function handleClick() {
     setOpen(!isOpen);
@@ -105,7 +105,7 @@ export default function Navigation({navlinks}) {
       </Nav>
     </>
   );
-}
+};
 
 Navigation.propTypes = {
   navlinks: PropTypes.arrayOf(
@@ -115,3 +115,5 @@ Navigation.propTypes = {
     })
   )
 };
+
+export default Navigation;

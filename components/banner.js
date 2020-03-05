@@ -17,7 +17,7 @@ const BannerImage = styled('div')`
   background-color: #444446;
 `;
 
-export default function Banner({data: {mainImage, title}}) {
+const Banner = ({data: {mainImage, title}}) => {
   return (
     <div sx={{position: 'relative', backgroundColor: '#4c516d'}}>
       <BannerImage image={mainImage} />
@@ -50,3 +50,5 @@ Banner.defaultProps = {
     mainImage: null
   }
 };
+
+export default Banner;

@@ -28,16 +28,11 @@ const HomeMapInner = styled('div')`
   }
 `;
 
-export default function MapLayout({
-  heading,
-  actions,
-  details,
-  location
-}) {
-  const [width, setWidth] = useState(1000)
+const MapLayout = ({heading, actions, details, location}) => {
+  const [width, setWidth] = useState(1000);
   useEffect(() => {
-    setWidth(window.innerWidth)
-  }, [])
+    setWidth(window.innerWidth);
+  }, []);
   return (
     <HomeSection>
       <HomeMapInner>
@@ -72,14 +67,21 @@ export default function MapLayout({
           </GoogleMap>
         </LoadScript>
       </HomeMapInner>
-      <MapOverlay heading={heading} details={details} actions={actions} lat={location.location.lat} long={location.location.lng} />
+      <MapOverlay
+        heading={heading}
+        details={details}
+        actions={actions}
+        lat={location.location.lat}
+        long={location.location.lng}
+      />
     </HomeSection>
   );
-}
+};
 
 MapLayout.propTypes = {
   heading: PropTypes.string,
-  blurb: PropTypes.string,
+  details: PropTypes.array,
+  location: PropTypes.object,
   actions: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
@@ -87,3 +89,5 @@ MapLayout.propTypes = {
     })
   )
 };
+
+export default MapLayout;

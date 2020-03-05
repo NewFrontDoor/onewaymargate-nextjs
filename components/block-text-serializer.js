@@ -87,7 +87,7 @@ const BlockRenderer = props => {
   return BlockContent.defaultSerializers.types.block(props);
 };
 
-export default function BlockText({blocks}) {
+const BlockText = ({blocks}) => {
   return (
     <BlockContentInt
       blocks={blocks}
@@ -106,8 +106,10 @@ export default function BlockText({blocks}) {
       }}
     />
   );
-}
+};
 
 BlockText.propTypes = {
   blocks: PropTypes.object.isRequired
 };
+
+export default BlockText;

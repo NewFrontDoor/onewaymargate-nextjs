@@ -100,7 +100,7 @@ const getFormField = field => {
   }
 };
 
-export default function Form({title, id, description, fields}) {
+const Form = ({title, id, description, fields}) => {
   return (
     <form id={id}>
       <fieldset>
@@ -125,3 +125,5 @@ Form.propTypes = {
   description: PropTypes.string.isRequired,
   fields: PropTypes.array.isRequired
 };
+
+export default Form;

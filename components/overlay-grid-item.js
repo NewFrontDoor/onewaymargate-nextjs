@@ -32,7 +32,7 @@ const Wrapper = styled.a`
   text-decoration: none;
 `;
 
-export default function Overlay({header, image, link}) {
+const Overlay = ({header, image, link}) => {
   return (
     <Wrapper href={link}>
       <Image
@@ -58,3 +58,5 @@ Overlay.propTypes = {
 Overlay.defaultProps = {
   image: null
 };
+
+export default Overlay;

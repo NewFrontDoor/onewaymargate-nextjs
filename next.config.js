@@ -5,6 +5,9 @@ const withCSS = require('@zeit/next-css');
 const withFonts = require('next-fonts');
 
 const nextConfig = {
+  env: {
+    GOOGLE_MAPS_API: process.env.GOOGLE_MAPS_API
+  },
   webpack: (config, options) => {
     // Modify the `config` here
 

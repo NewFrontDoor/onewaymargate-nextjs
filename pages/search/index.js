@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import {useQuery} from 'react-query';
+import ky from 'ky-universal';
 import HomeBlock from '../../components/block-text-serializer';
 import FlexSearch from 'flexsearch';
 import Layout from '../../components/layout';
@@ -43,79 +45,88 @@ const flex = new FlexSearch({
   }
 });
 
-export default function Search({pageData, menuData}) {
-  const [filter, setFilter] = useState('');
-  const [results, setResults] = useState(null);
-  const [flexindex, setFlexIndex] = useState(flex);
-  const [sermonflexindex, setSermonFlexIndex] = useState(sermonflex);
+async function retrieveIndexes(url) {
+  const data = await ky(url, {prefixUrl: 'http://localhost:3000'}).json();
 
-  async function handleChange(event) {
-    const filter = event.target.value;
-    const results = await flexindex
-      .search({
+  await flex.import(data.mainIndexExport);
+  await sermonflex.import(data.sermonIndexExport);
+
+  return {
+    async query(filter) {
+      const searchResults = await flex.search({
         query: filter,
         limit: 10,
         threshold: 5,
         depth: 3,
         field: ['title', 'searchbody']
-      })
-      .concat(
-        sermonflexindex.search({
-          query: filter,
-          limit: 10,
-          threshold: 5,
-          depth: 3,
-          field: ['title', 'preacher', 'book', 'series']
-        })
-      );
-    setResults(results);
-    setFilter(filter);
+      });
+
+      // const sermonResults = await sermonflex.search({
+      //   query: filter,
+      //   limit: 10,
+      //   threshold: 5,
+      //   depth: 3,
+      //   field: ['title', 'preacher', 'book', 'series']
+      // });
+
+      const results = searchResults; // .concat(sermonResults);
+
+      return results;
+    }
   };
+}
 
-  async function retrieveIndexes() {
-    const data = await fetch('http://localhost:3000/api/searchindex');
-    const parsed = await data.json();
-    await flex.import(parsed.mainIndexExport);
-    await sermonflex.import(parsed.sermonIndexExport);
+function useSearchIndex(filter) {
+  const {data: index} = useQuery('/api/searchindex', retrieveIndexes);
+  const {data: results} = useQuery(filter, filter => {
+    if (index) {
+      return index.query(filter);
+    }
+  });
+
+  return results || [];
+}
+
+const Search = ({pageData, menuData}) => {
+  const [filter, setFilter] = useState('');
+  const results = useSearchIndex(filter);
+
+  async function handleChange(event) {
+    const filter = event.target.value;
+    setFilter(filter);
   }
-
-  useEffect(() => {
-    retrieveIndexes();
-  }, []);
 
   return (
     <Layout menuData={menuData} mainData={pageData}>
       <Main>
         <HomeBlock blocks={pageData.body} />
         <input type="text" value={filter} onChange={handleChange} />
-        {results &&
-          results.map(result => (
-            <div key={result._id}>
-              <Link
-                href={
-                  result.pathname ? result.pathname : 'talks/' + result.slug
-                }
-              >
-                <h1>{result.title}</h1>
-              </Link>
-              {result.searchbody ? (
-                <p>{result.searchbody.slice(0, 100)}...</p>
-              ) : (
-                <p>
-                  {result.series} - {result.preacher}
-                  <br />
-                  {result.book}
-                </p>
-              )}
-            </div>
-          ))}
+        {results.map(result => (
+          <div key={result._id}>
+            <Link
+              href={result.pathname ? result.pathname : 'talks/' + result.slug}
+            >
+              <h1>{result.title}</h1>
+            </Link>
+            {result.searchbody ? (
+              <p>{result.searchbody.slice(0, 100)}...</p>
+            ) : (
+              <p>
+                {result.series} - {result.preacher}
+                <br />
+                {result.book}
+              </p>
+            )}
+          </div>
+        ))}
       </Main>
     </Layout>
   );
-}
+};
 
 Search.propTypes = {
-  pageData: PropTypes.object
+  pageData: PropTypes.object,
+  menuData: PropTypes.object
 };
 
 Search.getInitialProps = async () => {
@@ -127,3 +138,5 @@ Search.getInitialProps = async () => {
   );
   return results;
 };
+
+export default Search;

@@ -193,7 +193,7 @@ const MapOverlay = ({heading, details, actions, lat, long}) => {
 
             if (link.name === 'pagereference') {
               return (
-                <InternalLink column={index} url={link.url}>
+                <InternalLink key={link.url} column={index} url={link.url}>
                   {link.label}
                 </InternalLink>
               );

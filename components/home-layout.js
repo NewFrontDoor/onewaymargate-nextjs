@@ -105,9 +105,9 @@ const HomeLayout = (props) => {
         <HomeSectionInner>
           <h1 sx={{variant: 'text.homeH1'}}>{heading}</h1>
           {blurb && (
-            <p sx={{variant: 'text.homeBlurb'}}>
+            <div sx={{variant: 'text.homeBlurb'}}>
               <BlockText blocks={blurb} />
-            </p>
+            </div>
           )}
           {displayActions && (
             <Container

@@ -109,7 +109,7 @@ const BlockText = ({blocks}) => {
 };
 
 BlockText.propTypes = {
-  blocks: PropTypes.object.isRequired
+  blocks: PropTypes.array.isRequired
 };
 
 export default BlockText;

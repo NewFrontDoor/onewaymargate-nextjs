@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
-import {mapsKey} from '../../lib/config';
 import MapOverlay from './map-overlay';
 
 const HomeSection = styled('div')`
@@ -36,7 +35,10 @@ const MapLayout = ({heading, actions, details, location}) => {
   return (
     <HomeSection>
       <HomeMapInner>
-        <LoadScript id="script-loader" googleMapsApiKey={mapsKey}>
+        <LoadScript
+          id="script-loader"
+          googleMapsApiKey={process.env.GOOGLE_MAPS_API}
+        >
           <GoogleMap
             mapContainerStyle={{
               height: '100%',
@@ -82,7 +84,12 @@ MapLayout.propTypes = {
   heading: PropTypes.string,
   details: PropTypes.array,
   location: PropTypes.object,
-  actions: PropTypes.array
+  actions: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired
+    })
+  )
 };
 
 export default MapLayout;

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
+import {jsx} from 'theme-ui';
 import Link from 'next/link';
 import {useQuery} from 'react-query';
 import ky from 'ky-universal';
@@ -10,14 +10,13 @@ import Layout from '../../components/layout';
 import {fetchQuery} from '../../lib/sanity';
 import {menuQuery, pageQuery} from '../../lib/queries';
 
-const Main = styled('article')`
-  max-width: 700px;
-  margin: auto;
-  padding: 15px;
-  font-size: 1.15em;
-  line-height: 1.8;
-  color: #444444;
-`;
+const main = {
+  maxWidth: '700px',
+  margin: 'auto',
+  fontSize: '1.15em',
+  lineHeight: '1.8',
+  color: '#444444'
+};
 
 const coresearch = {
   encode: 'advanced',
@@ -98,7 +97,7 @@ const Search = ({pageData, menuData}) => {
 
   return (
     <Layout menuData={menuData} mainData={pageData}>
-      <Main>
+      <article sx={main}>
         <HomeBlock blocks={pageData.body} />
         <input type="text" value={filter} onChange={handleChange} />
         {results.map(result => (
@@ -119,7 +118,7 @@ const Search = ({pageData, menuData}) => {
             )}
           </div>
         ))}
-      </Main>
+      </article>
     </Layout>
   );
 };

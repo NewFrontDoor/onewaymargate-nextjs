@@ -1,28 +1,19 @@
 /** @jsx jsx */
-import {useState} from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 import {jsx, Styled} from 'theme-ui';
 import {StyledPlayer} from '@newfrontdoor/audio-player';
 import Layout from '../../components/layout';
 import {fetchQuery} from '../../lib/sanity';
 import {menuQuery, sermonSlugQuery} from '../../lib/queries';
 
-const Main = styled('article')`
-  max-width: ${props => (props.thing > 0 ? '1200px' : '700px')};
-  margin: auto;
-  padding: 15px;
-  font-size: 1.15em;
-  line-height: 1.8;
-  color: #444444;
-`;
-
-const SermonWrapper = styled('div')`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  gap: 20px;
-`;
+const main = {
+  maxWidth: '700px',
+  margin: 'auto',
+  padding: '15px',
+  fontSize: '1.15em',
+  lineHeight: '1.8',
+  color: '#444444'
+};
 
 const returnDay = number => {
   switch (number) {
@@ -76,15 +67,20 @@ const returnMonth = number => {
   }
 };
 
-export default function SermonPage({pageData, sermonData, menuData}) {
-  const [datePreached, setDatePreached] = useState(
-    new Date(sermonData.preachedDate)
-  );
+const SermonPage = ({sermonData, menuData}) => {
+  const datePreached = new Date(sermonData.preachedDate);
 
   return (
     <Layout menuData={menuData} mainData={sermonData}>
-      <Main thing={0}>
-        <SermonWrapper>
+      <article sx={main}>
+        <div
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: '1fr',
+            gridTemplateRows: 'auto',
+            gap: '20px'
+          }}
+        >
           <div>
             <Styled.h3>{sermonData.title}</Styled.h3>
             <StyledPlayer
@@ -116,15 +112,15 @@ export default function SermonPage({pageData, sermonData, menuData}) {
               </p>
             )}
           </div>
-        </SermonWrapper>
-      </Main>
+        </div>
+      </article>
     </Layout>
   );
-}
+};
 
 SermonPage.propTypes = {
-  slug: PropTypes.string.isRequired,
-  pageData: PropTypes.object
+  menuData: PropTypes.object.isRequired,
+  sermonData: PropTypes.array
 };
 
 SermonPage.getInitialProps = async ({query}) => {
@@ -136,3 +132,5 @@ SermonPage.getInitialProps = async ({query}) => {
   );
   return results;
 };
+
+export default SermonPage;

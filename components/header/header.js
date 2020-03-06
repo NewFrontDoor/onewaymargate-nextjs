@@ -1,42 +1,35 @@
 /** @jsx jsx */
 import PropTypes from 'prop-types';
 import {jsx} from 'theme-ui';
-import styled from '@emotion/styled';
 import Link from 'next/link';
 import useWindowScroll from '@react-hook/window-scroll';
-import OneWay from '../../public/OneWay.svg';
+import {ReactComponent as OneWay} from '../../public/OneWay.svg';
 import Navigation from './navigation';
 
-const Nav = styled('nav')`
-  z-index: 1000;
-  position: fixed;
-  top: 0;
-  width: 100vw;
-  padding: 0;
-  @media (min-width: 768px) {
-    padding: 0.8em 0;
-    background-color: rgb(59, 139, 235, ${props => props.offset / 50});
-  }
-`;
+const navSx = offset => ({
+  zIndex: 1000,
+  position: 'fixed',
+  top: 0,
+  width: '100vw',
+  padding: [0, 0, '0.8em 0'],
+  backgroundColor: [null, null, `rgb(59, 139, 235, ${offset / 50})`]
+});
 
-const NavInner = styled('div')`
-  max-width: 1170px;
-  margin: auto;
-  min-height: 2em;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  @media screen and (min-width: 768px) {
-    justify-content: space-between;
-  }
-`;
+const navInnerSx = {
+  maxWidth: '1170px',
+  margin: 'auto',
+  minHeight: '2em',
+  fontSize: '1rem',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: ['space-around', 'space-around', 'space-between']
+};
 
 const Header = ({navlinks}) => {
   const offset = useWindowScroll(60);
   return (
-    <Nav offset={offset}>
-      <NavInner>
+    <nav sx={navSx(offset)}>
+      <div sx={navInnerSx}>
         <Link href="/">
           <OneWay
             sx={{
@@ -49,8 +42,8 @@ const Header = ({navlinks}) => {
           />
         </Link>
         <Navigation navlinks={navlinks} offset={offset} />
-      </NavInner>
-    </Nav>
+      </div>
+    </nav>
   );
 };
 

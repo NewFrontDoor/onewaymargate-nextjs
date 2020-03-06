@@ -13,7 +13,7 @@ const Layout = ({menuData, mainData, children}) => {
       <Footer />
     </div>
   );
-}
+};
 
 Layout.propTypes = {
   menuData: PropTypes.object.isRequired,

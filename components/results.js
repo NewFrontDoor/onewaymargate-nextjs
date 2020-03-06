@@ -1,29 +1,17 @@
+/** @jsx jsx */
 import PropTypes from 'prop-types';
-import React from 'react';
-import styled from '@emotion/styled';
 import Link from 'next/link';
-
-const Wrapper = styled('div')`
-  display: grid;
-  grid-template-columns: 1fr;
-  color: black;
-`;
-
-const Title = styled('h3')`
-  color: red;
-`;
-
-const Preview = styled('p')`
-  font-style: italic;
-  width: 600px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
+import {Styled, jsx} from 'theme-ui';
 
 const Results = ({data, searchArray}) => {
   return (
-    <Wrapper>
+    <div
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: '1fr',
+        color: 'black'
+      }}
+    >
       <ul>
         {searchArray.map(item => (
           <li key={item}>{item}</li>
@@ -33,19 +21,27 @@ const Results = ({data, searchArray}) => {
         const loc = item.body.indexOf(searchArray[0]);
         return (
           <div key={item.title}>
-            <Title>
+            <Styled.h3 sx={{color: 'red'}}>
               <Link href={`/${item.slug}`}>{item.title}</Link>
-            </Title>
-            <Preview>
+            </Styled.h3>
+            <Styled.p
+              sx={{
+                fontStyle: 'italic',
+                width: '600px',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
+              }}
+            >
               {loc >= 30 && '...'}
               {item.body.slice(loc < 30 ? 0 : loc - 30)}
-            </Preview>
+            </Styled.p>
           </div>
         );
       })}
-    </Wrapper>
+    </div>
   );
-}
+};
 
 Results.propTypes = {
   searchArray: PropTypes.arrayOf(PropTypes.string),

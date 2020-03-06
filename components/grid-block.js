@@ -1,46 +1,39 @@
+/** @jsx jsx */
 import PropTypes from 'prop-types';
-import React from 'react';
-import styled from '@emotion/styled';
+import {jsx} from 'theme-ui';
 
-const Grid = styled('div')`
-  display: grid;
-  grid-template-columns: ${props => props.columns};
-  grid-template-rows: auto;
-  gap: ${props => props.gap};
-  @media (min-width: 450px) and (max-width: 890px) {
-    grid-template-columns: ${props =>
-      `repeat(${Math.round(props.columnRawValue / 2)}, 1fr)`};
-  }
-`;
-
-const ItemOuter = styled('div')`
-  display: grid;
-  grid-template-columns: 1fr;
-  margin-bottom: ${props => props.marginBottom};
-`;
+const gridSx = ({gap, columns, columnRawValue}) => ({
+  display: 'grid',
+  gridTemplateRows: 'auto',
+  gap,
+  gridTemplateColumns: [
+    columns,
+    `repeat(${Math.round(columnRawValue / 2)}, 1fr)`,
+    columns
+  ]
+});
 
 const GridBlock = props => {
-  const {
-    items,
-    columns,
-    columnRawValue,
-    renderProp,
-    gap,
-    marginBottom,
-    style
-  } = props;
+  const {items, renderProp, marginBottom, style} = props;
   return (
-    <Grid columns={columns} columnRawValue={columnRawValue} gap={gap}>
+    <div sx={gridSx(props)}>
       {items.map(item => {
         return item.id ? (
           <div />
         ) : (
-          <ItemOuter key={item._id} marginBottom={marginBottom}>
+          <div
+            key={item._id}
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: '1fr',
+              marginBottom
+            }}
+          >
             {renderProp(item, style)}
-          </ItemOuter>
+          </div>
         );
       })}
-    </Grid>
+    </div>
   );
 };
 

@@ -49,8 +49,7 @@ const SermonGrid = ({sermons, series}) => {
       .url()
   };
   const modseries = series.map(ind => {
-    const hasImage =
-      ind.hasOwnProperty('image') && ind.image.hasOwnProperty('asset');
+    const hasImage = ind.hasOwnProperty('image') && ind.image.hasOwnProperty('asset');
     return {
       ...ind,
       image: urlFor(hasImage ? ind.image : '')
@@ -73,7 +72,7 @@ const SermonGrid = ({sermons, series}) => {
       />
     </Grid>
   );
-}
+};
 
 SermonGrid.propTypes = {
   series: PropTypes.array,

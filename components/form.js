@@ -1,6 +1,5 @@
-import React from 'react';
+/** @jsx jsx */
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 import {
   Label,
   Textarea,
@@ -8,47 +7,16 @@ import {
   Checkbox,
   Button,
   Radio,
-  Select
+  Select,
+  jsx
 } from 'theme-ui';
 import BlockText from './block-text-serializer';
-
-const Grid = styled('section')`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
-
-  input:focus,
-  textarea:focus {
-    outline: 3px solid gold;
-  }
-
-  .fullwidth {
-    grid-column: 1 / 3;
-  }
-  .inline {
-    display: inline;
-  }
-`;
-
-const RadioGroup = styled('fieldset')`
-  input {
-    width: initial;
-  }
-  label {
-    display: inline;
-    margin-left: 10px;
-    padding-bottom: 0px;
-  }
-  legend {
-    grid-column: 1 / 3;
-  }
-`;
 
 const getFormField = field => {
   switch (field.input) {
     case 'textarea':
       return (
-        <div className="fullwidth">
+        <div sx={{gridColumn: '1/3'}}>
           <Label htmlFor={field.id}>{field.label}</Label>
           <Textarea id={field.id} name={field.label} rows="8" />
         </div>
@@ -68,21 +36,32 @@ const getFormField = field => {
       );
     case 'radio':
       return (
-        <RadioGroup>
-          <legend>{field.label}</legend>
+        <fieldset>
+          <legend sx={{gridColumn: '1/3'}}>{field.label}</legend>
           {field.values.map(value => (
             <div key={field.id}>
-              <Radio type="radio" id={value} name={field.id} value={value} />
-              <Label htmlFor={value}>{value}</Label>
+              <Radio
+                type="radio"
+                sx={{width: 'initial'}}
+                id={value}
+                name={field.id}
+                value={value}
+              />
+              <Label
+                sx={{display: 'inline', ml: '10px', pb: '0px'}}
+                htmlFor={value}
+              >
+                {value}
+              </Label>
             </div>
           ))}
-        </RadioGroup>
+        </fieldset>
       );
     case 'checkbox':
       return (
         <div>
           <Checkbox type="checkbox" id={field.id} name={field.label} />
-          <Label className="inline" htmlFor={field.id}>
+          <Label sx={{display: 'inline'}} htmlFor={field.id}>
             {field.label}
           </Label>
         </div>
@@ -106,18 +85,24 @@ const Form = ({title, id, description, fields}) => {
       <fieldset>
         <h2>{title}</h2>
         <BlockText blocks={description} />
-        <Grid>
+        <section
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gridGap: '20px'
+          }}
+        >
           {fields.map(field => {
             return getFormField(field);
           })}
-          <Button className="fullwidth" type="submit" value="Submit">
+          <Button sx={{gridColumn: '1/3'}} type="submit" value="Submit">
             Submit
           </Button>
-        </Grid>
+        </section>
       </fieldset>
     </form>
   );
-}
+};
 
 Form.propTypes = {
   title: PropTypes.string.isRequired,

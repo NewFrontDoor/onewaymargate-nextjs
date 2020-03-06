@@ -1,25 +1,17 @@
 /** @jsx jsx */
 import {jsx} from 'theme-ui';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
-import {readableColor} from 'polished';
 import {useSpring, animated} from 'react-spring';
 import urlFor from '../lib/sanityImg';
 import BlockText from './block-text-serializer';
 import Action from './action-button';
 import Arrow from './arrow';
+import {getColor} from '../lib/color-functions';
 
 const overlayColors = {
   blue: '#007dc5',
   light: 'white',
   dark: '#444446'
-};
-
-const textColors = {
-  blue: 'white',
-  light: '#444446',
-  dark: 'white',
-  custom: '#444446'
 };
 
 const opacities = {
@@ -29,110 +21,93 @@ const opacities = {
   custom: 0.15
 };
 
-const Container = styled('div')`
-  display: grid;
-  grid-gap: 2em;
-  grid-template-columns: 1fr 100px 100px 1fr;
-  height: 100px;
-  @media (min-width: 420px) {
-    grid-template-columns: ${props => props.columns};
-    grid-template-rows: ${props => props.rows};
-    grid-gap: ${props => props.columnGap};
-    height: auto;
-  }
-`;
+const containerSx = actions => ({
+  display: 'grid',
+  gridGap: '2em',
+  gridTemplateColumns: [
+    '1fr 100px 100px 1fr',
+    `auto repeat(${actions}, 7.25rem) auto`
+  ],
+  gridTemplateRows: [null, '7.25rem'],
+  height: ['100px', 'auto']
+});
 
-const HomeSection = styled('div')`
-  position: relative;
-  z-index: 1;
-  height: ${props => (props.firstpage ? '100vh' : 'calc(100vh - 100px)')};
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: 1fr 1fr 1fr;
-  color: ${props =>
-    props.displaystyle.style === 'custom'
-      ? readableColor(
-          props.displaystyle.custom_color.hex,
-          textColors.light,
-          textColors.dark
-        )
-      : textColors[props.displaystyle.style]};
-`;
+const homeSection = ({isFirstPage, styling}) => ({
+  position: 'relative',
+  zIndex: '1',
+  height: isFirstPage && '100vh',
+  display: 'grid',
+  gridTemplateColumns: 'auto',
+  gridTemplateRows: '1fr 1fr 1fr',
+  color: getColor(styling)
+});
 
-const HomeSectionBackground = styled('section')`
-  background-color: ${props =>
-    props.displaystyle.style === 'custom'
-      ? props.displaystyle.custom_color.hex
-      : overlayColors[props.displaystyle.style]};
-  width: 100%;
-  position: relative;
-`;
+const homeSectionBackground = ({styling}) => ({
+  backgroundColor:
+    styling.style === 'custom'
+      ? styling.custom_color.hex
+      : overlayColors[styling.style],
+  width: '100%',
+  position: 'relative'
+});
 
-const HomeSectionBackgroundImage = styled(animated.img)`
-  opacity: ${props => opacities[props.displaystyle]};
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-`;
+const imageStyle = {
+  objectFit: 'cover',
+  position: 'absolute',
+  top: '0',
+  width: '100%',
+  height: '100%'
+};
 
-const HomeSectionInner = styled('div')`
-  grid-row: 2;
-  max-width: 980px;
-  margin: auto;
-  padding-top: 6.25rem;
-  padding-bottom: 6.25rem;
-  text-align: center;
-  font-family: rubik, proxima-nova, helvetica neue, arial, sans-serif;
-  vertical-align: middle;
-`;
+const homeSectionInner = {
+  gridRow: '2',
+  maxWidth: '980px',
+  margin: 'auto',
+  paddingTop: '6.25rem',
+  paddingBottom: '6.25rem',
+  textAlign: 'center',
+  fontFamily: 'rubik, proxima-nova, helvetica neue, arial, sans-serif',
+  verticalAlign: 'middle'
+};
 
-const HomeLayout = (props) => {
-  const {heading, blurb, actions, background, styling, firstpage} = props;
-  const displayActions = actions.length > 0;
+const HomeLayout = props => {
+  const {heading, blurb, actions, background, styling, isFirstPage} = props;
   const [fade, set] = useSpring(() => ({opacity: 0, config: {duration: 500}}));
 
   return (
-    <HomeSectionBackground displaystyle={styling}>
-      <HomeSectionBackgroundImage
+    <section sx={homeSectionBackground({styling})}>
+      <animated.img
         src={urlFor(background).url()}
-        displaystyle={styling.style}
+        sx={{...imageStyle, opacity: opacities[styling.style]}}
         style={fade}
         onLoad={() => set({opacity: 0.15})}
       />
-      <HomeSection displaystyle={styling} firstpage={firstpage}>
-        <HomeSectionInner>
+      <div sx={homeSection(props)}>
+        <div sx={homeSectionInner}>
           <h1 sx={{variant: 'text.homeH1'}}>{heading}</h1>
           {blurb && (
             <div sx={{variant: 'text.homeBlurb'}}>
               <BlockText blocks={blurb} />
             </div>
           )}
-          {displayActions && (
-            <Container
-              columns={`auto repeat(${actions.length}, 7.25rem) auto`}
-              rows="7.25rem"
-              gap="2rem"
-            >
+          {actions && (
+            <div sx={containerSx(actions.length)}>
               {actions.map((link, index) => (
                 <Action
                   key={link.url}
                   link={link}
                   column={index + 2}
-                  textColors={textColors}
-                  overlayColors={overlayColors}
                   displaystyle={styling}
                 />
               ))}
-            </Container>
+            </div>
           )}
-        </HomeSectionInner>
-        {firstpage && <Arrow />}
-      </HomeSection>
-    </HomeSectionBackground>
+        </div>
+        {isFirstPage && <Arrow />}
+      </div>
+    </section>
   );
-}
+};
 
 HomeLayout.propTypes = {
   actions: PropTypes.arrayOf(
@@ -142,12 +117,16 @@ HomeLayout.propTypes = {
         label: PropTypes.string
       })
     })
-  ).isRequired,
+  ),
   background: PropTypes.object,
   blurb: PropTypes.array,
-  firstpage: PropTypes.bool.isRequired,
+  isFirstPage: PropTypes.bool.isRequired,
   heading: PropTypes.string.isRequired,
   styling: PropTypes.object.isRequired
+};
+
+HomeLayout.defaultProps = {
+  actions: null
 };
 
 export default HomeLayout;

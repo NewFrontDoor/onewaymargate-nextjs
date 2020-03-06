@@ -1,59 +1,40 @@
+/** @jsx jsx */
 import PropTypes from 'prop-types';
-import React, {useState} from 'react';
+import {useState} from 'react';
 import Link from 'next/link';
-import styled from '@emotion/styled';
 import HamburgerMenu from 'react-hamburger-menu';
 import SearchIcon from '../../public/search';
 import Navlink from './nav-link';
 import Navparent from './nav-parent';
+import {jsx} from 'theme-ui';
 
-const Nav = styled('ul')`
-  flex: 0 1 auto;
-  list-style: none;
-  margin: 0;
-  align-items: center;
-  ${props => (props.isOpen ? `display: block;` : `display: none;`)}
-  position: absolute;
-  top: 70px;
-  right: 0px;
-  border: #efefef 1px solid;
-  padding: 2px;
-  border-radius: 2px;
-  background-color: white;
-  color: #444446;
-  width: auto;
-  @media screen and (min-width: 768px) {
-    padding: 0;
-    display: block;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    position: unset;
-    border: none;
-    color: inherit;
-    background: none;
-    width: initial;
-  }
-`;
+const navSx = isOpen => ({
+  flex: '0 1 auto',
+  listStyle: 'none',
+  margin: '0',
+  alignItems: 'center',
+  display: [`${isOpen ? 'block' : 'none'}`, 'flex'],
+  position: ['absolute', 'unset'],
+  top: '70px',
+  right: '0px',
+  border: ['#efefef 1px solid', 'none'],
+  padding: ['2px', 0],
+  borderRadius: '2px',
+  backgroundColor: ['white', 'none'],
+  color: ['#444446', 'inherit'],
+  width: ['auto', 'initial'],
+  flexDirection: [null, 'row'],
+  justifyContent: [null, 'flex-end']
+});
 
-const Search = styled('div')`
-  height: 16px;
-  width: 16px;
-  color: #444446;
-  height: 100%;
-  margin: 0.5em 0 0 1.25em;
-  padding: 0;
-  vertical-align: center;
-  @media screen and (min-width: 768px) {
-    color: white;
-  }
-`;
-
-const Vis = styled('div')`
-  @media screen and (min-width: 768px) {
-    display: none;
-  }
-`;
+const search = {
+  width: '16px',
+  color: ['#444446', 'white'],
+  height: '16px',
+  margin: '0.5em 0 0 1.25em',
+  padding: '0',
+  verticalAlign: 'center'
+};
 
 const Navigation = ({navlinks}) => {
   const [isOpen, setOpen] = useState(false);
@@ -63,7 +44,7 @@ const Navigation = ({navlinks}) => {
 
   return (
     <>
-      <Vis>
+      <div sx={{display: ['block', 'none']}}>
         <HamburgerMenu
           isOpen={isOpen}
           menuClicked={handleClick}
@@ -75,8 +56,8 @@ const Navigation = ({navlinks}) => {
           borderRadius={0}
           animationDuration={0.3}
         />
-      </Vis>
-      <Nav isOpen={isOpen} onClick={() => setOpen(false)}>
+      </div>
+      <nav sx={navSx(isOpen)} onClick={() => setOpen(false)}>
         {navlinks.map(link => {
           if (!link.childpages) {
             return null;
@@ -97,12 +78,14 @@ const Navigation = ({navlinks}) => {
             />
           );
         })}
-        <Search>
-          <Link href="/search">
-            <SearchIcon color="white" />
+        <div sx={search}>
+          <Link passHref href="/search">
+            <a>
+              <SearchIcon color="white" />
+            </a>
           </Link>
-        </Search>
-      </Nav>
+        </div>
+      </nav>
     </>
   );
 };

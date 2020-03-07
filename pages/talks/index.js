@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+/** @jsx jsx */
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
+import {jsx} from 'theme-ui';
 import {SermonTable} from '@newfrontdoor/sermon';
-import {SearchCollection as SermonFilter} from '@newfrontdoor/search';
 import HomeBlock from '../../components/block-text-serializer';
 import Layout from '../../components/layout';
 import {fetchQuery} from '../../lib/sanity';
@@ -23,26 +22,20 @@ const headers = [
   {heading: 'Date Preached', key: 'date', searchable: false}
 ];
 
-const Main = styled('article')`
-  max-width: 1200px;
-  padding: 20px;
-  margin: auto;
-  font-size: 1.15em;
-  line-height: 1.8;
-  color: #444444;
-`;
+const main = {
+  maxWidth: '1200px',
+  padding: '20px',
+  margin: 'auto',
+  fontSize: '1.15em',
+  lineHeight: '1.8',
+  color: '#444444'
+};
 
-export default function Sermons({
-  pageData,
-  sermonData,
-  seriesData,
-  menuData,
-  def
-}) {
+const Sermons = ({pageData, sermonData, seriesData, menuData, def}) => {
   const sermonsSubset = sermonData.slice(0, 10);
   return (
     <Layout menuData={menuData} mainData={pageData}>
-      <Main>
+      <article sx={main}>
         <HomeBlock blocks={pageData.body} />
 
         <SermonGrid sermons={sermonData} series={seriesData} def={def} />
@@ -55,14 +48,17 @@ export default function Sermons({
             <Link href={`${directory}/${slug}`}>{title}</Link>
           )}
         />
-      </Main>
+      </article>
     </Layout>
   );
-}
+};
 
 Sermons.propTypes = {
-  slug: PropTypes.string.isRequired,
-  pageData: PropTypes.array
+  pageData: PropTypes.array,
+  sermonData: PropTypes.array,
+  seriesData: PropTypes.array,
+  menuData: PropTypes.object,
+  def: PropTypes.any
 };
 
 Sermons.getInitialProps = async () => {
@@ -76,3 +72,5 @@ Sermons.getInitialProps = async () => {
   );
   return results;
 };
+
+export default Sermons;

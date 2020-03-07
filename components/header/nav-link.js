@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import PropTypes from "prop-types";
-import {jsx, Styled, Link as UILink} from 'theme-ui';
+import PropTypes from 'prop-types';
+import {jsx, Styled, NavLink as UILink} from 'theme-ui';
 import Link from 'next/link';
 
 const Navlink = ({link, text}) => (
@@ -20,6 +20,6 @@ const Navlink = ({link, text}) => (
 Navlink.propTypes = {
   link: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired
-}
+};
 
 export default Navlink;

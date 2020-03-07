@@ -1,115 +1,71 @@
+/** @jsx jsx */
 import PropTypes from 'prop-types';
-import React from 'react';
-import styled from '@emotion/styled';
 import Link from 'next/link';
-import BlockContent from '@sanity/block-content-to-react';
+import BlockText from './block-text-serializer';
 import urlFor from '../lib/sanityImg';
-
-const Wrapper = styled('section')`
-  display: grid;
-  @media (min-width: 420px) {
-    grid-template-columns: 200px 1fr;
-    gap: 20px;
-  }
-`;
-
-const Header = styled('h3')`
-  max-width: 100%;
-  text-align: left;
-  margin: 0;
-  margin-bottom: 30px;
-`;
-
-const Image = styled.img``;
-
-const CustomStyleSerializer = ({children}) => {
-  return <p>{children}</p>;
-};
-
-const AnchorSerializer = ({children, mark}) => {
-  return <span id={mark.id}>{children}</span>;
-};
+import {jsx, Styled} from 'theme-ui';
 
 const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/;
 
-const HorizontalCard = ({
-  header,
-  title,
-  description,
-  shortdescription,
-  image,
-  mainImage,
-  link,
-  slug
-}) => {
+const LinkWrapper = ({link, slug, children}) => {
+  return !link && !slug ? (
+    <>{children}</>
+  ) : regex.test(link || slug) ? (
+    <Link passHref href={`/${link || slug.current}`}>
+      <Styled.a sx={{display: 'contents', color: 'text'}}>{children}</Styled.a>
+    </Link>
+  ) : (
+    <Styled.a href={link} sx={{display: 'contents', color: 'text'}}>
+      {children}
+    </Styled.a>
+  );
+};
+
+LinkWrapper.propTypes = {
+  children: PropTypes.any,
+  link: PropTypes.string,
+  slug: PropTypes.shape({
+    current: PropTypes.string
+  })
+};
+
+const HorizontalCard = props => {
+  const {
+    header,
+    title,
+    description,
+    shortdescription,
+    image,
+    mainImage
+  } = props;
   return (
-    <Wrapper>
-      {!link && !slug ? (
-        <Image
+    <section
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: [null, '200px 1fr'],
+        gap: [null, '20px']
+      }}
+    >
+      <LinkWrapper {...props}>
+        <img
           src={urlFor(image || mainImage)
             .width(200)
             .height(200)
             .auto('format')
             .url()}
-          alt={header}
+          alt={header || title}
         />
-      ) : regex.test(link || slug) ? (
-        <Link href={`/${link || slug.current}`}>
-          <Image
-            src={urlFor(image || mainImage)
-              .width(200)
-              .height(200)
-              .auto('format')
-              .url()}
-            alt={header}
-          />
-        </Link>
-      ) : (
-        <a href={link}>
-          <Image
-            src={urlFor(image)
-              .width(200)
-              .height(200)
-              .auto('format')
-              .url()}
-            alt={header || title}
-          />
-        </a>
-      )}
-      <div>
-        {!link && !slug ? (
-          <Header>{header || title}</Header>
-        ) : regex.test(link || slug) ? (
-          <Link href={`/${link || slug.current}`}>
-            <Header style={{textDecoration: 'underline'}}>
-              {header || title}
-            </Header>
-          </Link>
-        ) : (
-          <a href={link}>
-            <Header style={{textDecoration: 'underline'}}>
-              {header || title}
-            </Header>
-          </a>
-        )}
-        {description && (
-          <BlockContent
-            blocks={description}
-            serializers={{
-              types: {
-                p: CustomStyleSerializer
-              },
-              marks: {
-                anchor: AnchorSerializer
-              }
-            }}
-          />
-        )}
-        {shortdescription && <p>{shortdescription}</p>}
-      </div>
-    </Wrapper>
+        <div>
+          <Styled.h3 sx={{maxWidth: '100%', m: 0, mb: '30px'}}>
+            {header || title}
+          </Styled.h3>
+          {description && <BlockText blocks={description} />}
+          {shortdescription && <Styled.p>{shortdescription}</Styled.p>}
+        </div>
+      </LinkWrapper>
+    </section>
   );
-}
+};
 
 HorizontalCard.propTypes = {
   description: PropTypes.object,

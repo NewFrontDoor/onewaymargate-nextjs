@@ -1,40 +1,35 @@
-import React, {useState, useEffect} from 'react';
+/** @jsx jsx */
+import {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
+import {jsx} from 'theme-ui';
 import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api';
 import MapOverlay from './map-overlay';
 
-const HomeSection = styled('div')`
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 200px 200px;
-  color: #444446;
-  @media (min-width: 420px) {
-    height: calc(100vh - 300px);
-    grid-template-columns: 3fr 3fr;
-    grid-template-rows: 1fr 1fr 1fr;
-  }
-`;
+const homeSection = {
+  position: 'relative',
+  zIndex: '1',
+  display: 'grid',
+  gridTemplateColumns: ['1fr', '3fr 3fr'],
+  gridTemplateRows: ['200px 200px', '1fr 1fr 1fr'],
+  height: [null, 'calc(100vh - 300px)'],
+  color: 'text'
+};
 
-const HomeMapInner = styled('div')`
-  grid-column: 1;
-  grid-row: 1;
-  @media (min-width: 420px) {
-    grid-column: 1/3;
-    grid-row: 1/4;
-  }
-`;
+const homeMapInner = {
+  gridColumn: ['1', '1/3'],
+  gridRow: ['1', '1/4']
+};
 
 const MapLayout = ({heading, actions, details, location}) => {
   const [width, setWidth] = useState(1000);
+
   useEffect(() => {
     setWidth(window.innerWidth);
   }, []);
+
   return (
-    <HomeSection>
-      <HomeMapInner>
+    <div sx={homeSection}>
+      <div sx={homeMapInner}>
         <LoadScript
           id="script-loader"
           googleMapsApiKey={process.env.GOOGLE_MAPS_API}
@@ -68,7 +63,7 @@ const MapLayout = ({heading, actions, details, location}) => {
             />
           </GoogleMap>
         </LoadScript>
-      </HomeMapInner>
+      </div>
       <MapOverlay
         heading={heading}
         details={details}
@@ -76,7 +71,7 @@ const MapLayout = ({heading, actions, details, location}) => {
         lat={location.location.lat}
         long={location.location.lng}
       />
-    </HomeSection>
+    </div>
   );
 };
 

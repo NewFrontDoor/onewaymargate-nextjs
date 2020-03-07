@@ -1,16 +1,11 @@
+/** @jsx jsx */
 import PropTypes from 'prop-types';
-import React from 'react';
-import styled from '@emotion/styled';
+import {jsx} from 'theme-ui';
 import SermonBlock from './sermon-block';
-
-const Sermons = styled('div')`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-`;
 
 const SermonLayout = ({sermons}) => {
   return (
-    <Sermons>
+    <div sx={{display: 'grid', gridTemplateColumns: '1fr 1fr'}}>
       {sermons.map(sermon => (
         <SermonBlock
           key={sermon.id}
@@ -21,9 +16,9 @@ const SermonLayout = ({sermons}) => {
           book={sermon.book}
         />
       ))}
-    </Sermons>
+    </div>
   );
-}
+};
 
 SermonLayout.propTypes = {
   sermons: PropTypes.arrayOf(

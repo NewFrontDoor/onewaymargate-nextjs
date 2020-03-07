@@ -1,123 +1,106 @@
 /** @jsx jsx */
 import PropTypes from 'prop-types';
-import {css, jsx} from '@emotion/core';
-import styled from '@emotion/styled';
 import Link from 'next/link';
 import urlFor from '../lib/sanityImg';
 import BlockText from './block-text-serializer';
+import {jsx, Styled} from 'theme-ui';
 
-const Actions = styled('section')`
-  grid-column: 1/1;
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  justify-content: space-evenly;
-  width: 50%;
-  margin: auto;
-  button {
-    background: none;
-    text-transform: lowercase;
-    font-size: 0.8em;
-    padding: 10px 15px 10px 15px;
+const actionSx = {
+  textDecoration: 'none',
+  padding: '10px 0',
+  fontSize: '0.8em',
+  textTransform: 'uppercase',
+  border: '1px solid',
+  borderColor: 'text',
+  borderRadius: '40px',
+  color: 'text',
+  width: '7.25rem',
+  ':hover': {
+    backgroundColor: 'text',
+    color: 'background',
+    cursor: 'pointer'
   }
-`;
-
-const action = css`
-  text-decoration: none;
-  padding: 10px 0;
-  font-size: 0.8em;
-  text-transform: uppercase;
-  border: 1px solid;
-  border-color: #444446;
-  border-radius: 40px;
-  grid-column-start: NaN;
-  color: #444446;
-  width: 7.25rem;
-  :hover {
-    background-color: #444446;
-    color: white;
-    cursor: pointer;
-  }
-  @media (min-width: 420px) {
-    grid-column-start: ${props => props.column + 2};
-  }
-`;
-
-const Header = styled('h3')`
-  grid-column: 1/1;
-  max-width: 100%;
-  text-align: center;
-  margin: 0.5em;
-`;
-
-const Image = styled.img`
-  grid-column: 1/1;
-  width: 100%;
-`;
-
-const InternalLink = ({url, children}) => {
-  return (
-    <Link css={action} href={`/${url}`}>
-      {children}
-    </Link>
-  );
-};
-
-const ExternalLink = ({url, children}) => {
-  return (
-    <a css={action} href={`${url}`}>
-      {children}
-    </a>
-  );
 };
 
 const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/;
 
-const Card = ({header, description, image, link, action}) => {
+const Card = ({header, description, shortdescription, image, link, action}) => {
   return (
     <div>
       {regex.test(link) ? (
-        <Link href={`/${link}`}>
-          <Image
-            src={urlFor(image)
-              .width(530)
-              .height(135)
-              .auto('format')
-              .url()}
-            alt={header}
-          />
-          <Header>{header}</Header>
+        <Link passHref href={`/${link}`}>
+          <a>
+            <img
+              src={urlFor(image)
+                .width(530)
+                .height(135)
+                .auto('format')
+                .url()}
+              alt={header}
+              sx={{gridColumn: '1/1', width: '100%'}}
+            />
+            <Styled.h3
+              sx={{
+                gridColumn: '1/1',
+                maxWidth: '100%',
+                textAlign: 'center',
+                margin: '0.5em'
+              }}
+            >
+              {header}
+            </Styled.h3>
+          </a>
         </Link>
       ) : (
         <a href={link}>
-          <Image
+          <img
             src={urlFor(image)
               .width(530)
               .height(135)
               .auto('format')
               .url()}
             alt={header}
+            sx={{gridColumn: '1/1', width: '100%'}}
           />
-          <Header>{header}</Header>
+          <Styled.h3
+            sx={{
+              gridColumn: '1/1',
+              maxWidth: '100%',
+              textAlign: 'center',
+              margin: '0.5em'
+            }}
+          >
+            {header}
+          </Styled.h3>
         </a>
       )}
       <BlockText blocks={description} />
+      {shortdescription && <Styled.p>{shortdescription}</Styled.p>}
       {link && (
-        <Actions>
-          {regex.test(link) ? (
-            <InternalLink url={link}>{action}</InternalLink>
-          ) : (
-            <ExternalLink url={link}>{action}</ExternalLink>
-          )}
-        </Actions>
+        <section
+          sx={{
+            gridColumn: '1/1',
+            display: 'flex',
+            flexDirection: 'row',
+            textAlign: 'center',
+            justifyContent: 'space-evenly',
+            width: '50%',
+            margin: 'auto'
+          }}
+        >
+          <Link passHref href={regex.test(link) ? '/' + link : link}>
+            <a sx={actionSx}>{action}</a>
+          </Link>
+        </section>
       )}
     </div>
   );
-}
+};
 
 Card.propTypes = {
   action: PropTypes.string,
   description: PropTypes.object,
+  shortdescription: PropTypes.string,
   header: PropTypes.string.isRequired,
   image: PropTypes.any,
   link: PropTypes.string.isRequired
@@ -126,6 +109,7 @@ Card.propTypes = {
 Card.defaultProps = {
   action: 'VIEW PAGE',
   description: null,
+  shortdescription: null,
   image: null
 };
 

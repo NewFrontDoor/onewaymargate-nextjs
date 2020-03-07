@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+/** @jsx jsx */
+import {useState} from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 import Link from 'next/link';
 import {SermonTable} from '@newfrontdoor/sermon';
 import {SearchCollection as SermonFilter} from '@newfrontdoor/search';
@@ -8,6 +8,7 @@ import HomeBlock from '../../components/block-text-serializer';
 import Layout from '../../components/layout';
 import {fetchQuery} from '../../lib/sanity';
 import {pageQuery, menuQuery, sermonQuery} from '../../lib/queries';
+import {jsx} from 'theme-ui';
 
 const headers = [
   {heading: 'Title', key: 'title', searchable: true},
@@ -17,20 +18,20 @@ const headers = [
   {heading: 'Date Preached', key: 'date', searchable: false}
 ];
 
-const Main = styled('article')`
-  max-width: 1200px;
-  margin: auto;
-  font-size: 1.15em;
-  line-height: 1.8;
-  color: #444444;
-`;
+const main = {
+  maxWidth: '1200px',
+  margin: 'auto',
+  fontSize: '1.15em',
+  lineHeight: '1.8',
+  color: '#444444'
+};
 
 const AllSermons = ({pageData, menuData, sermonData}) => {
   const [sermonsSubset, setSubset] = useState(sermonData);
 
   return (
     <Layout menuData={menuData} mainData={pageData}>
-      <Main>
+      <article sx={main}>
         <HomeBlock blocks={pageData.body} />
         <SermonFilter
           dataCollection={sermonData}
@@ -51,10 +52,10 @@ const AllSermons = ({pageData, menuData, sermonData}) => {
             <Link href={`${directory}/${slug}`}>{title}</Link>
           )}
         />
-      </Main>
+      </article>
     </Layout>
   );
-}
+};
 
 AllSermons.propTypes = {
   pageData: PropTypes.object.isRequired,

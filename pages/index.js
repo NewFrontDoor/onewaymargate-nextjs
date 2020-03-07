@@ -21,7 +21,7 @@ const Home = ({mainData, menuData}) => {
           <HomeLayout
             key={segment.heading}
             {...segment}
-            firstpage={index === 0}
+            isFirstPage={index === 0}
           />
         );
       })}

@@ -17,12 +17,25 @@ const CustomStyleSerializer = ({children}) => {
   return <Styled.p>{children}</Styled.p>;
 };
 
+CustomStyleSerializer.propTypes = {
+  children: PropTypes.string.isRequired
+};
+
 const AnchorSerializer = ({children, mark}) => {
   return <span id={mark.id}>{children}</span>;
 };
 
+AnchorSerializer.propTypes = {
+  children: PropTypes.string.isRequired,
+  mark: PropTypes.object.isRequired
+};
+
 const ImageSerializer = ({node}) => {
   return <img src={urlFor(node).url()} />;
+};
+
+ImageSerializer.propTypes = {
+  node: PropTypes.node.isRequired
 };
 
 const GridBlockSerializer = ({node: {blocks, columns, style}}) => {
@@ -53,8 +66,20 @@ const GridBlockSerializer = ({node: {blocks, columns, style}}) => {
   );
 };
 
-const FormSerializer = ({node: {header, id, body, fields}}) => {
-  return <Form header={header} id={id} description={body} fields={fields} />;
+GridBlockSerializer.propTypes = {
+  node: PropTypes.shape({
+    blocks: PropTypes.arrayOf(PropTypes.node),
+    columns: PropTypes.number,
+    style: PropTypes.string.isRequired
+  }).isRequired
+};
+
+const FormSerializer = ({node}) => {
+  return <Form {...node} />;
+};
+
+FormSerializer.propTypes = {
+  node: PropTypes.object.isRequired
 };
 
 const InternalLinkSerializer = ({mark, children}) => (
@@ -62,6 +87,26 @@ const InternalLinkSerializer = ({mark, children}) => (
     <Styled.a>{children}</Styled.a>
   </Link>
 );
+
+const ExternalLinkSerializer = ({mark, children}) => (
+  <Link href={mark.href}>
+    <Styled.a>{children}</Styled.a>
+  </Link>
+);
+
+InternalLinkSerializer.propTypes = {
+  children: PropTypes.any,
+  mark: PropTypes.shape({
+    slug: PropTypes.string
+  }).isRequired
+};
+
+ExternalLinkSerializer.propTypes = {
+  children: PropTypes.any,
+  mark: PropTypes.shape({
+    href: PropTypes.string
+  }).isRequired
+};
 
 const BlockRenderer = props => {
   const style = props.node.style || 'normal';
@@ -87,6 +132,11 @@ const BlockRenderer = props => {
   return BlockContent.defaultSerializers.types.block(props);
 };
 
+BlockRenderer.propTypes = {
+  children: PropTypes.any,
+  node: PropTypes.object.isRequired
+};
+
 const BlockText = ({blocks}) => {
   return (
     <BlockContentInt
@@ -101,7 +151,8 @@ const BlockText = ({blocks}) => {
         },
         marks: {
           anchor: AnchorSerializer,
-          internalLink: InternalLinkSerializer
+          internalLink: InternalLinkSerializer,
+          link: ExternalLinkSerializer
         }
       }}
     />

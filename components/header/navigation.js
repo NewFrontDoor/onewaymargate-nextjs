@@ -81,7 +81,14 @@ const Navigation = ({navlinks}) => {
         <div sx={search}>
           <Link passHref href="/search">
             <a>
-              <SearchIcon fill="white" />
+              <SearchIcon
+                fill="white"
+                sx={{
+                  ':hover': {
+                    fill: 'accent'
+                  }
+                }}
+              />
             </a>
           </Link>
         </div>

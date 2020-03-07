@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {jsx} from 'theme-ui';
 import Link from 'next/link';
 import useWindowScroll from '@react-hook/window-scroll';
-import {ReactComponent as OneWay} from '../../public/OneWay.svg';
+import {ReactComponent as Logo} from '../../public/OneWay.svg';
 import Navigation from './navigation';
 
 const navSx = offset => ({
@@ -32,13 +32,14 @@ const Header = ({navlinks}) => {
       <div sx={navInnerSx}>
         <Link href="/">
           <a>
-            <OneWay
+            <Logo
               sx={{
                 flex: '0 1 auto',
                 maxWidth: '100%',
                 height: ['70px', '100px'],
                 width: 'auto',
-                display: 'inline-block'
+                display: 'inline-block',
+                fill: 'white'
               }}
             />
           </a>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {useState} from 'react';
 import Link from 'next/link';
 import HamburgerMenu from 'react-hamburger-menu';
-import SearchIcon from '../../public/search';
+import {ReactComponent as SearchIcon} from '../../public/search.svg';
 import Navlink from './nav-link';
 import Navparent from './nav-parent';
 import {jsx} from 'theme-ui';
@@ -81,7 +81,7 @@ const Navigation = ({navlinks}) => {
         <div sx={search}>
           <Link passHref href="/search">
             <a>
-              <SearchIcon color="white" />
+              <SearchIcon fill="white" />
             </a>
           </Link>
         </div>

@@ -3,8 +3,8 @@ import React from 'react';
 import App from 'next/app';
 import {ThemeProvider, Styled} from 'theme-ui';
 import theme from '../lib/theme';
-require('typeface-noto-serif/index.css'); //eslint-disable-line
-require('typeface-rubik/index.css'); //eslint-disable-line
+require('typeface-noto-serif'); //eslint-disable-line
+require('typeface-rubik'); //eslint-disable-line
 
 class MyApp extends App {
   // Only uncomment this method if you have blocking data requirements for
@@ -32,7 +32,7 @@ class MyApp extends App {
 }
 
 MyApp.propTypes = {
-  Component: PropTypes.node.isRequired,
+  Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.any.isRequired
 };
 

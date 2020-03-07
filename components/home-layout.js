@@ -10,8 +10,8 @@ import {getColor} from '../lib/color-functions';
 
 const overlayColors = {
   blue: '#007dc5',
-  light: 'white',
-  dark: '#444446'
+  light: 'background',
+  dark: 'text'
 };
 
 const opacities = {

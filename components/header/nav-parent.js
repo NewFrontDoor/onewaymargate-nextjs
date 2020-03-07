@@ -12,7 +12,7 @@ const listItem = {
     opacity: '1',
     display: 'block'
   },
-  color: ['#444446', '#444446', 'white'],
+  color: ['text', 'text', 'background'],
   margin: [null, null, '0.3125em 0 -1rem 1.25em'],
   paddingBottom: [null, null, '1rem']
 };
@@ -29,10 +29,10 @@ const submenuSx = {
   marginTop: '1rem',
   left: '0',
   display: 'none',
-  color: '#444446',
+  color: 'text',
   padding: '0.75em 0.5em 0.75em 0.625em',
   borderRadius: '0.3125em',
-  backgroundColor: 'white',
+  backgroundColor: 'background',
   boxShadow: '0 2px 12px rgba(0, 0, 0, 0.15)'
 };
 

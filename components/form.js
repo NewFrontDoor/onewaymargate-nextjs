@@ -16,14 +16,14 @@ const getFormField = field => {
   switch (field.input) {
     case 'textarea':
       return (
-        <div sx={{gridColumn: '1/3'}}>
+        <div key={field.id} sx={{gridColumn: '1/3'}}>
           <Label htmlFor={field.id}>{field.label}</Label>
           <Textarea id={field.id} name={field.label} rows="8" />
         </div>
       );
     case 'select':
       return (
-        <div>
+        <div key={field.id}>
           <Label htmlFor={field.id}>{field.label}</Label>
           <Select id={field.id} name={field.label}>
             {field.values.map(value => (
@@ -36,7 +36,7 @@ const getFormField = field => {
       );
     case 'radio':
       return (
-        <fieldset>
+        <fieldset key={field.label}>
           <legend sx={{gridColumn: '1/3'}}>{field.label}</legend>
           {field.values.map(value => (
             <div key={field.id}>
@@ -59,7 +59,7 @@ const getFormField = field => {
       );
     case 'checkbox':
       return (
-        <div>
+        <div key={field.id}>
           <Checkbox type="checkbox" id={field.id} name={field.label} />
           <Label sx={{display: 'inline'}} htmlFor={field.id}>
             {field.label}
@@ -68,7 +68,7 @@ const getFormField = field => {
       );
     default:
       return (
-        <div>
+        <div key={field.id}>
           <Label htmlFor={field.id} required={field.required}>
             {field.label}
             {field.required ? <strong>*</strong> : ''}
@@ -84,7 +84,7 @@ const Form = ({title, id, description, fields}) => {
     <form id={id}>
       <fieldset>
         <h2>{title}</h2>
-        <BlockText blocks={description} />
+        {description && <BlockText blocks={description} />}
         <section
           sx={{
             display: 'grid',
@@ -107,7 +107,7 @@ const Form = ({title, id, description, fields}) => {
 Form.propTypes = {
   title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.array,
   fields: PropTypes.array.isRequired
 };
 

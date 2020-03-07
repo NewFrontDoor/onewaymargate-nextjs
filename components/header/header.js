@@ -31,15 +31,17 @@ const Header = ({navlinks}) => {
     <nav sx={navSx(offset)}>
       <div sx={navInnerSx}>
         <Link href="/">
-          <OneWay
-            sx={{
-              flex: '0 1 auto',
-              maxWidth: '100%',
-              height: ['70px', '100px'],
-              width: 'auto',
-              display: 'inline-block'
-            }}
-          />
+          <a>
+            <OneWay
+              sx={{
+                flex: '0 1 auto',
+                maxWidth: '100%',
+                height: ['70px', '100px'],
+                width: 'auto',
+                display: 'inline-block'
+              }}
+            />
+          </a>
         </Link>
         <Navigation navlinks={navlinks} offset={offset} />
       </div>

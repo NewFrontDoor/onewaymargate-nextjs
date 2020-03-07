@@ -20,8 +20,8 @@ const navSx = isOpen => ({
   border: ['#efefef 1px solid', 'none'],
   padding: ['2px', 0],
   borderRadius: '2px',
-  backgroundColor: ['white', 'none'],
-  color: ['#444446', 'inherit'],
+  backgroundColor: ['background', 'none'],
+  color: ['text', 'inherit'],
   width: ['auto', 'initial'],
   flexDirection: [null, 'row'],
   justifyContent: [null, 'flex-end']
@@ -29,7 +29,7 @@ const navSx = isOpen => ({
 
 const search = {
   width: '16px',
-  color: ['#444446', 'white'],
+  color: ['text', 'background'],
   height: '16px',
   margin: '0.5em 0 0 1.25em',
   padding: '0',

@@ -12,7 +12,7 @@ const homeSection = {
   gridTemplateColumns: ['1fr', '3fr 3fr'],
   gridTemplateRows: ['200px 200px', '1fr 1fr 1fr'],
   height: [null, 'calc(100vh - 300px)'],
-  color: '#444446'
+  color: 'text'
 };
 
 const homeMapInner = {

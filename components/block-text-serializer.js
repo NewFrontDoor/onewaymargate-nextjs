@@ -79,7 +79,7 @@ const FormSerializer = ({node}) => {
 };
 
 FormSerializer.propTypes = {
-  node: PropTypes.node.isRequired
+  node: PropTypes.object.isRequired
 };
 
 const InternalLinkSerializer = ({mark, children}) => (

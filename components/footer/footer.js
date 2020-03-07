@@ -11,7 +11,7 @@ const Footer = () => {
         paddingTop: '2rem',
         paddingBottom: '2rem',
         backgroundColor: '#3b8beb',
-        color: 'white'
+        color: 'background'
       }}
     >
       <div

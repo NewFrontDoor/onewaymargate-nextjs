@@ -10,7 +10,7 @@ const headerSx = {
   textAlign: 'left',
   m: '10px',
   zIndex: 20,
-  color: 'white',
+  color: 'background',
   alignSelf: 'end'
 };
 

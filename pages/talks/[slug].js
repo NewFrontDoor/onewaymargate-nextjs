@@ -12,7 +12,7 @@ const main = {
   padding: '15px',
   fontSize: '1.15em',
   lineHeight: '1.8',
-  color: '#444444'
+  color: 'text'
 };
 
 const returnDay = number => {

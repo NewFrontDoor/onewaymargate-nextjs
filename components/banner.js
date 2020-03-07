@@ -13,7 +13,7 @@ const bannerImage = mainImage => ({
   backgroundSize: 'cover',
   backgroundPosition: 'center center',
   backgroundRepeat: 'no-repeat',
-  backgroundColor: '#444446'
+  backgroundColor: 'text'
 });
 
 const Banner = ({data: {mainImage, title}}) => {

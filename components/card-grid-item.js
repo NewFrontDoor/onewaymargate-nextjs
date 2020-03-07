@@ -11,13 +11,13 @@ const actionSx = {
   fontSize: '0.8em',
   textTransform: 'uppercase',
   border: '1px solid',
-  borderColor: '#444446',
+  borderColor: 'text',
   borderRadius: '40px',
-  color: '#444446',
+  color: 'text',
   width: '7.25rem',
   ':hover': {
-    backgroundColor: '#444446',
-    color: 'white',
+    backgroundColor: 'text',
+    color: 'background',
     cursor: 'pointer'
   }
 };

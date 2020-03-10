@@ -8,7 +8,7 @@ import HomeBlock from '../../components/block-text-serializer';
 import Layout from '../../components/layout';
 import {fetchQuery} from '../../lib/sanity';
 import {pageQuery, menuQuery, sermonQuery} from '../../lib/queries';
-import {jsx} from 'theme-ui';
+import {jsx, Styled} from 'theme-ui';
 
 const headers = [
   {heading: 'Title', key: 'title', searchable: true},
@@ -49,7 +49,9 @@ const AllSermons = ({pageData, menuData, sermonData}) => {
           columnHide={[5]}
           sermonDirectory="talks"
           renderLink={(directory, slug, title) => (
-            <Link href={`${directory}/${slug}`}>{title}</Link>
+            <Link href={`${directory}/${slug}`}>
+              <Styled.a>{title}</Styled.a>
+            </Link>
           )}
         />
       </article>

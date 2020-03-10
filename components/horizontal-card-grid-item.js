@@ -7,8 +7,8 @@ import {jsx, Styled} from 'theme-ui';
 
 const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/;
 
-const LinkWrapper = ({link, slug, children}) => {
-  return !link && !slug ? (
+const LinkWrapper = ({link, slug, children}) =>
+  !link && !slug ? (
     <>{children}</>
   ) : regex.test(link || slug) ? (
     <Link passHref href={`/${link || slug.current}`}>
@@ -19,7 +19,6 @@ const LinkWrapper = ({link, slug, children}) => {
       {children}
     </Styled.a>
   );
-};
 
 LinkWrapper.propTypes = {
   children: PropTypes.any,
@@ -55,27 +54,27 @@ const HorizontalCard = props => {
             .url()}
           alt={header || title}
         />
-        <div>
+      </LinkWrapper>
+      <div>
+        <LinkWrapper {...props}>
           <Styled.h3 sx={{maxWidth: '100%', m: 0, mb: '30px'}}>
             {header || title}
           </Styled.h3>
-          {description && <BlockText blocks={description} />}
-          {shortdescription && <Styled.p>{shortdescription}</Styled.p>}
-        </div>
-      </LinkWrapper>
+        </LinkWrapper>
+        {description && <BlockText blocks={description} />}
+        {shortdescription && <Styled.p>{shortdescription}</Styled.p>}
+      </div>
     </section>
   );
 };
 
 HorizontalCard.propTypes = {
-  description: PropTypes.object,
-  header: PropTypes.string.isRequired,
+  description: PropTypes.array,
+  header: PropTypes.string,
   image: PropTypes.any,
-  link: PropTypes.string.isRequired,
   mainImage: PropTypes.any,
   shortdescription: PropTypes.string,
-  slug: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string
 };
 
 HorizontalCard.defaultProps = {

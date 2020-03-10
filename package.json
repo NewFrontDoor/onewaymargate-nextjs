@@ -12,7 +12,7 @@
     "@emotion/styled": "^10.0.12",
     "@newfrontdoor/audio-player": "0.1.8",
     "@newfrontdoor/search": "^0.2.0",
-    "@newfrontdoor/sermon": "0.4.1",
+    "@newfrontdoor/sermon": "^0.5.5",
     "@react-google-maps/api": "^1.5.1",
     "@react-hook/window-scroll": "^1.0.0",
     "@sanity/block-content-to-react": "^2.0.6",

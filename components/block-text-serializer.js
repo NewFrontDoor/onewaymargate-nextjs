@@ -1,7 +1,7 @@
+/** @jsx jsx */
 import React from 'react';
 import BlockContent from '@sanity/block-content-to-react';
-import {Styled} from 'theme-ui';
-import styled from '@emotion/styled';
+import {Styled, jsx} from 'theme-ui';
 import Link from 'next/link';
 import urlFor from '../lib/sanityImg';
 import Form from './form';
@@ -10,8 +10,6 @@ import Card from './card-grid-item';
 import HorizontalCard from './horizontal-card-grid-item';
 import Overlay from './overlay-grid-item';
 import PropTypes from 'prop-types';
-
-const BlockContentInt = styled(BlockContent)(`line-height: 26px;`);
 
 const CustomStyleSerializer = ({children}) => {
   return <Styled.p>{children}</Styled.p>;
@@ -26,7 +24,7 @@ const AnchorSerializer = ({children, mark}) => {
 };
 
 AnchorSerializer.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.array.isRequired,
   mark: PropTypes.object.isRequired
 };
 
@@ -68,7 +66,7 @@ const GridBlockSerializer = ({node: {blocks, columns, style}}) => {
 
 GridBlockSerializer.propTypes = {
   node: PropTypes.shape({
-    blocks: PropTypes.arrayOf(PropTypes.node),
+    blocks: PropTypes.arrayOf(PropTypes.object),
     columns: PropTypes.number,
     style: PropTypes.string.isRequired
   }).isRequired
@@ -89,20 +87,20 @@ const InternalLinkSerializer = ({mark, children}) => (
 );
 
 const ExternalLinkSerializer = ({mark, children}) => (
-  <Link href={mark.href}>
+  <Link passHref href={mark.href} prefetch={false}>
     <Styled.a>{children}</Styled.a>
   </Link>
 );
 
 InternalLinkSerializer.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.array.isRequired,
   mark: PropTypes.shape({
     slug: PropTypes.string
   }).isRequired
 };
 
 ExternalLinkSerializer.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.array.isRequired,
   mark: PropTypes.shape({
     href: PropTypes.string
   }).isRequired
@@ -139,7 +137,10 @@ BlockRenderer.propTypes = {
 
 const BlockText = ({blocks}) => {
   return (
-    <BlockContentInt
+    <BlockContent
+      sx={{
+        lineHeight: '26px'
+      }}
       blocks={blocks}
       serializers={{
         types: {

@@ -14,7 +14,7 @@ const Home = ({mainData, menuData}) => {
       <Header navlinks={menuData.menuitems} />
       {content.map((segment, index) => {
         if (segment.location) {
-          return <MapLayout key={segment.heading} {...segment} />;
+          return <MapLayout key={'map' + index} {...segment} />;
         }
 
         return (

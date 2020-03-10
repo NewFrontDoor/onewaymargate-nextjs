@@ -11,7 +11,6 @@ const main = gridblock => ({
   margin: 'auto',
   padding: '15px',
   fontSize: '1.15em',
-  lineHeight: '1.8',
   color: '#444444'
 });
 

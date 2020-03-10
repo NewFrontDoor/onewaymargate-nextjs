@@ -1546,10 +1546,10 @@
   dependencies:
     prop-types "^15.7.2"
 
-"@newfrontdoor/sermon@0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@newfrontdoor/sermon/-/sermon-0.4.1.tgz#aefd5c942751dc75ba1796b94af56ad2ac0d1d10"
-  integrity sha512-t++Ot5u8gT5x0Ea+a/Rbfi13SUlewPbBZVcqTKao5tJHmtVnHhaCj1sCpfHx3VxUhAfyTzauNLFYduUkdr6LSw==
+"@newfrontdoor/sermon@^0.5.5":
+  version "0.5.5"
+  resolved "https://registry.yarnpkg.com/@newfrontdoor/sermon/-/sermon-0.5.5.tgz#9a12a3cecf45c008517069c37f32ee44289caf98"
+  integrity sha512-kF7bpxCx1Sv64KrxvZfBzw62/e95VV0/YZrhyTBeyLJlVidAfxhgUUWcSMc4ovNVbN4f/fDX0dIcknVd5NbP+w==
   dependencies:
     "@newfrontdoor/api-config" "^0.1.0"
     "@newfrontdoor/audio-player" "^0.1.2"

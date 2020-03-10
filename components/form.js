@@ -8,6 +8,9 @@ import {
   Button,
   Radio,
   Select,
+  Grid,
+  Box,
+  Styled,
   jsx
 } from 'theme-ui';
 import BlockText from './block-text-serializer';
@@ -71,7 +74,7 @@ const getFormField = field => {
         <div key={field.id}>
           <Label htmlFor={field.id} required={field.required}>
             {field.label}
-            {field.required ? <strong>*</strong> : ''}
+            {field?.required && <strong>*</strong>}
           </Label>
           <Input type={field.input} id={field.id} name={field.label} />
         </div>
@@ -81,26 +84,20 @@ const getFormField = field => {
 
 const Form = ({title, id, description, fields}) => {
   return (
-    <form id={id}>
+    <Box as="form" id={id}>
       <fieldset>
-        <h2>{title}</h2>
+        <Styled.h2>{title}</Styled.h2>
         {description && <BlockText blocks={description} />}
-        <section
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gridGap: '20px'
-          }}
-        >
+        <Grid gap={20} columns={['1fr, 1fr']}>
           {fields.map(field => {
             return getFormField(field);
           })}
           <Button sx={{gridColumn: '1/3'}} type="submit" value="Submit">
             Submit
           </Button>
-        </section>
+        </Grid>
       </fieldset>
-    </form>
+    </Box>
   );
 };
 

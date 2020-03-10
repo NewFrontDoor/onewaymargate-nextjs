@@ -66,20 +66,20 @@ const Navigation = ({navlinks}) => {
           return link.childpages.length <= 1 ? (
             <Navlink
               key={link.text}
-              link={'/' + link.childpages[0].slug.current}
+              link={link.childpages[0].slug.current}
               text={link.text}
             />
           ) : (
             <Navparent
               key={link.text}
-              link={'/' + link.childpages[0].slug.current}
+              link={link.childpages[0].slug.current}
               text={link.text}
               childpages={link.childpages}
             />
           );
         })}
         <div sx={search}>
-          <Link passHref href="/search">
+          <Link passHref href="/search" as="/search">
             <a>
               <SearchIcon
                 fill="white"

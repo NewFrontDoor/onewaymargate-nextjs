@@ -3,6 +3,19 @@ import PropTypes from 'prop-types';
 import {jsx, Styled, NavLink as UILink} from 'theme-ui';
 import Link from 'next/link';
 
+const pageLookup = link => {
+  switch (link) {
+    case 'talks':
+      return '/talks';
+    case 'search':
+      return '/search';
+    case 'all-talks':
+      return '/all-talks';
+    default:
+      return '/[slug]';
+  }
+};
+
 const Navlink = ({link, text}) => (
   <Styled.li
     sx={{
@@ -11,7 +24,7 @@ const Navlink = ({link, text}) => (
       lineHeight: ['1.6', 'initial']
     }}
   >
-    <Link href={link}>
+    <Link href={pageLookup(link)} as={`/${link}`}>
       <UILink variant="nav">{text}</UILink>
     </Link>
   </Styled.li>

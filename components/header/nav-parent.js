@@ -36,10 +36,23 @@ const submenuSx = {
   boxShadow: '0 2px 12px rgba(0, 0, 0, 0.15)'
 };
 
+const pageLookup = link => {
+  switch (link) {
+    case 'talks':
+      return '/talks';
+    case 'search':
+      return '/search';
+    case 'all-talks':
+      return '/all-talks';
+    default:
+      return '/[slug]';
+  }
+};
+
 const Navparent = ({link, text, childpages}) => {
   return (
     <li sx={listItem}>
-      <Link href={`/${link}`}>
+      <Link href={pageLookup(link)} as={`/${link}`}>
         <UILink variant="nav">{text}</UILink>
       </Link>
       <ul sx={submenuSx}>

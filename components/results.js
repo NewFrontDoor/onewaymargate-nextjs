@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import PropTypes from 'prop-types';
-import Link from 'next/link';
+import Link from './link';
 import {Styled, jsx} from 'theme-ui';
 
 const Results = ({data, searchArray}) => {
@@ -22,7 +22,7 @@ const Results = ({data, searchArray}) => {
         return (
           <div key={item.title}>
             <Styled.h3 sx={{color: 'red'}}>
-              <Link href={`/${item.slug}`}>{item.title}</Link>
+              <Link link={item.slug}>{item.title}</Link>
             </Styled.h3>
             <Styled.p
               sx={{

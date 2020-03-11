@@ -2,7 +2,7 @@ import React from 'react';
 import BlockContent from '@sanity/block-content-to-react';
 import {Styled} from 'theme-ui';
 import styled from '@emotion/styled';
-import Link from 'next/link';
+import Link from './link';
 import urlFor from '../lib/sanityImg';
 import Form from './form';
 import GridBlock from './grid-block';
@@ -83,13 +83,13 @@ FormSerializer.propTypes = {
 };
 
 const InternalLinkSerializer = ({mark, children}) => (
-  <Link href={`/${mark.slug}`}>
+  <Link link={mark.slug}>
     <Styled.a>{children}</Styled.a>
   </Link>
 );
 
 const ExternalLinkSerializer = ({mark, children}) => (
-  <Link href={mark.href}>
+  <Link link={mark.href}>
     <Styled.a>{children}</Styled.a>
   </Link>
 );

@@ -1,25 +1,18 @@
 /** @jsx jsx */
 import PropTypes from 'prop-types';
-import Link from 'next/link';
+import Link from './link';
 import BlockText from './block-text-serializer';
 import urlFor from '../lib/sanityImg';
 import {jsx, Styled} from 'theme-ui';
 
-const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/;
-
-const LinkWrapper = ({link, slug, children}) => {
-  return !link && !slug ? (
-    <>{children}</>
-  ) : regex.test(link || slug) ? (
-    <Link passHref href={`/${link || slug.current}`}>
-      <Styled.a sx={{display: 'contents', color: 'text'}}>{children}</Styled.a>
+const LinkWrapper = ({link, slug, children}) =>
+  link || slug ? (
+    <Link link={link || slug.current} variant="circle">
+      {children}
     </Link>
   ) : (
-    <Styled.a href={link} sx={{display: 'contents', color: 'text'}}>
-      {children}
-    </Styled.a>
+    children
   );
-};
 
 LinkWrapper.propTypes = {
   children: PropTypes.any,
@@ -55,14 +48,16 @@ const HorizontalCard = props => {
             .url()}
           alt={header || title}
         />
-        <div>
+      </LinkWrapper>
+      <div>
+        <LinkWrapper {...props}>
           <Styled.h3 sx={{maxWidth: '100%', m: 0, mb: '30px'}}>
             {header || title}
           </Styled.h3>
-          {description && <BlockText blocks={description} />}
-          {shortdescription && <Styled.p>{shortdescription}</Styled.p>}
-        </div>
-      </LinkWrapper>
+        </LinkWrapper>
+        {description && <BlockText blocks={description} />}
+        {shortdescription && <Styled.p>{shortdescription}</Styled.p>}
+      </div>
     </section>
   );
 };

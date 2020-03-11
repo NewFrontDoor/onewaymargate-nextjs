@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import PropTypes from 'prop-types';
-import Link from 'next/link';
+import Link from './link';
 import {jsx} from 'theme-ui';
 import {getColor} from '../lib/color-functions';
 
@@ -30,7 +30,7 @@ const Action = props => {
     link: {url, label}
   } = props;
   return (
-    <Link href={`/${url}`}>
+    <Link variant="circle" link={url}>
       <div key={label} sx={actionStyles(props)}>
         {label}
       </div>

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import PropTypes from 'prop-types';
-import Link from 'next/link';
-import {jsx, NavLink as UILink} from 'theme-ui';
+import Link from '../link';
+import {jsx} from 'theme-ui';
 
 const listItem = {
   position: 'relative',
@@ -36,33 +36,22 @@ const submenuSx = {
   boxShadow: '0 2px 12px rgba(0, 0, 0, 0.15)'
 };
 
-const pageLookup = link => {
-  switch (link) {
-    case 'talks':
-      return '/talks';
-    case 'search':
-      return '/search';
-    case 'all-talks':
-      return '/all-talks';
-    default:
-      return '/[slug]';
-  }
-};
-
 const Navparent = ({link, text, childpages}) => {
   return (
     <li sx={listItem}>
-      <Link href={pageLookup(link)} as={`/${link}`}>
-        <UILink variant="nav">{text}</UILink>
+      <Link link={link} variant="nav">
+        {text}
       </Link>
       <ul sx={submenuSx}>
         {childpages.map(child => {
           return (
             <li key={child.slug.current} sx={{paddingBottom: '0.5em'}}>
-              <Link passHref href={`/${child.slug.current}`}>
-                <UILink variant="nav" sx={{color: 'inherit'}}>
-                  {child.title}
-                </UILink>
+              <Link
+                link={`/${child.slug.current}`}
+                variant="nav"
+                passedSx={{color: 'inherit'}}
+              >
+                {child.title}
               </Link>
             </li>
           );

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import PropTypes from 'prop-types';
 import {useState} from 'react';
-import Link from 'next/link';
+import Link from '../link';
 import HamburgerMenu from 'react-hamburger-menu';
 import {ReactComponent as SearchIcon} from '../../public/search.svg';
 import Navlink from './nav-link';
@@ -79,17 +79,15 @@ const Navigation = ({navlinks}) => {
           );
         })}
         <div sx={search}>
-          <Link passHref href="/search" as="/search">
-            <a>
-              <SearchIcon
-                fill="white"
-                sx={{
-                  ':hover': {
-                    fill: 'accent'
-                  }
-                }}
-              />
-            </a>
+          <Link link="search">
+            <SearchIcon
+              fill="white"
+              sx={{
+                ':hover': {
+                  fill: 'accent'
+                }
+              }}
+            />
           </Link>
         </div>
       </nav>

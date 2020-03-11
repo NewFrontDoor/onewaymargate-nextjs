@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import {useState} from 'react';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
+import Link from '../../components/link';
 import {SermonTable} from '@newfrontdoor/sermon';
 import {SearchCollection as SermonFilter} from '@newfrontdoor/search';
 import HomeBlock from '../../components/block-text-serializer';
@@ -49,7 +49,7 @@ const AllSermons = ({pageData, menuData, sermonData}) => {
           columnHide={[5]}
           sermonDirectory="talks"
           renderLink={(directory, slug, title) => (
-            <Link href={`${directory}/${slug}`}>{title}</Link>
+            <Link link={`${directory}/${slug}`}>{title}</Link>
           )}
         />
       </article>

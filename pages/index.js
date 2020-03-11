@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/header/header';
+import Head from 'next/head';
 import Footer from '../components/footer/footer';
 import {fetchQuery} from '../lib/sanity';
 import HomeLayout from '../components/home-layout';
@@ -11,6 +12,9 @@ const Home = ({mainData, menuData}) => {
   const {content} = mainData;
   return (
     <div>
+      <Head>
+        <title>OneWay Margate - Home</title>
+      </Head>
       <Header navlinks={menuData.menuitems} />
       {content.map((segment, index) => {
         if (segment.location) {

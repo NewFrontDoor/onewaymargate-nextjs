@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {jsx, Styled} from 'theme-ui';
 import {StyledPlayer} from '@newfrontdoor/audio-player';
 import Layout from '../../components/layout';
+import Link from '../../components/link';
 import {fetchQuery} from '../../lib/sanity';
 import {menuQuery, sermonSlugQuery} from '../../lib/queries';
 
@@ -93,9 +94,9 @@ const SermonPage = ({sermonData, menuData}) => {
               audio={sermonData.url}
               width="300px"
             />
-            <a download href={sermonData.url}>
+            <Link download link={sermonData.url}>
               Download
-            </a>
+            </Link>
             <p sx={{fontSize: '16px', lineHeight: '18px'}}>
               Speaker - {sermonData.preacher}
             </p>

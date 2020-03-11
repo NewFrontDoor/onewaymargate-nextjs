@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from 'react';
 import BlockContent from '@sanity/block-content-to-react';
-import {Styled} from 'theme-ui';
+import {Styled, jsx} from 'theme-ui';
 import Link from './link';
 import urlFor from '../lib/sanityImg';
 import Form from './form';

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import PropTypes from 'prop-types';
-import {jsx, Styled} from 'theme-ui';
+import {jsx} from 'theme-ui';
 import {SermonTable} from '@newfrontdoor/sermon';
 import HomeBlock from '../../components/block-text-serializer';
 import Layout from '../../components/layout';
@@ -49,7 +49,7 @@ const Sermons = ({pageData, sermonData, seriesData, menuData, defaultData}) => {
           columnHide={[5]}
           sermonDirectory="talks"
           renderLink={(directory, slug, title) => (
-            <Link link={`${directory}/${slug}`}>{title}</Link> // NEED FIX
+            <Link link={`${directory}/${slug}`}>{title}</Link>
           )}
         />
       </article>

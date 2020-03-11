@@ -4,43 +4,56 @@ import NextLink from 'next/link';
 import {Link as ThemeUiLink} from 'theme-ui';
 
 const pageLookup = link => {
+  // This depends on the fact that no sub-subdirectory of pages contains an index file
+  if (link.includes('/')) {
+    const urlArray = link.split('/');
+    urlArray.pop();
+    const root = urlArray.reduce((url, element) => {
+      return url.concat('/', element);
+    });
+    return `/${root}/[slug]`;
+  }
+
   switch (link) {
     case '':
-      return '/';
     case 'talks':
-      return '/talks';
     case 'search':
-      return '/search';
     case 'all-talks':
-      return '/all-talks';
+      return `/${link}`;
     default:
       return '/[slug]';
   }
 };
 
-const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/;
+const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/|api|\/api).*/;
 
-const Link = ({link = '', variant, children, noAnchor, passedSx}) => {
+const Link = ({
+  link = '',
+  children,
+  isBlank,
+  hasNoAnchor,
+  passedSx,
+  ...rest
+}) => {
+  if (isBlank) {
+    rest.target = '_blank';
+    rest.rel = 'noreferrer noopener';
+  }
+
   return regex.test(link) ? (
-    noAnchor ? (
+    hasNoAnchor ? (
       <NextLink passHref href={pageLookup(link)} as={`/${link}`}>
         {children}
       </NextLink>
     ) : (
       <NextLink passHref href={pageLookup(link)} as={`/${link}`}>
-        <ThemeUiLink variant={variant} sx={passedSx}>
+        <ThemeUiLink sx={passedSx} {...rest}>
           {children}
         </ThemeUiLink>
       </NextLink>
     )
   ) : (
-    <ThemeUiLink
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      variant={variant}
-      sx={passedSx}
-    >
+    <ThemeUiLink href={link} sx={passedSx} {...rest}>
       {children}
     </ThemeUiLink>
   );
@@ -50,7 +63,8 @@ Link.propTypes = {
   children: PropTypes.any,
   variant: PropTypes.string,
   link: PropTypes.string.isRequired,
-  noAnchor: PropTypes.bool,
+  isBlank: PropTypes.bool,
+  hasNoAnchor: PropTypes.bool,
   passedSx: PropTypes.object
 };
 

@@ -54,7 +54,7 @@ const types = {
 
 const MapLink = ({url, children, column}) => {
   return (
-    <Link noAnchor variant="circle" link={url}>
+    <Link hasNoAnchor variant="circle" link={url}>
       <Button variant="map" sx={{gridColumnStart: [column + 1, column + 2]}}>
         {children}
       </Button>

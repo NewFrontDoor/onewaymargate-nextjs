@@ -63,14 +63,12 @@ const HorizontalCard = props => {
 };
 
 HorizontalCard.propTypes = {
-  description: PropTypes.object,
-  header: PropTypes.string.isRequired,
+  description: PropTypes.array,
+  header: PropTypes.string,
   image: PropTypes.any,
-  link: PropTypes.string.isRequired,
   mainImage: PropTypes.any,
   shortdescription: PropTypes.string,
-  slug: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string
 };
 
 HorizontalCard.defaultProps = {

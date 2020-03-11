@@ -1,3 +1,4 @@
+/** @jsx jsx */
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
@@ -5,43 +6,20 @@ import {
   CurrentSeries,
   RecentSeries
 } from '@newfrontdoor/sermon';
+import {Styled, Grid, jsx} from 'theme-ui';
 import imageUrlBuilder from '@sanity/image-url';
-import styled from '@emotion/styled';
 import sanityClient from '../lib/sanity';
 
-const Grid = styled.div`
-  display: grid;
-  h2 {
-    margin: 0;
-  }
-  img {
-    width: 100%;
-  }
-
-  section {
-    display: contents;
-  }
-  @media (min-width: 700px) {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 50px auto;
-    grid-auto-flow: column;
-    gap: 5px 20px;
-    section:nth-of-type(3) {
-      h2 {
-        grid-column: 3/5;
-      }
-    }
-  }
-`;
 const builder = imageUrlBuilder(sanityClient);
 
 function urlFor(source) {
   return builder.image(source);
 }
 
-const SermonGrid = ({sermons, series}) => {
+const SermonGrid = ({sermons, series, config}) => {
   const latestSermon = {
     ...sermons[0],
+    id: sermons[0]._id,
     link: `talks/${sermons[0].slug}`,
     image: urlFor(sermons[0].image)
       .width(300)
@@ -49,10 +27,9 @@ const SermonGrid = ({sermons, series}) => {
       .url()
   };
   const modseries = series.map(ind => {
-    const hasImage = ind.hasOwnProperty('image') && ind.image.hasOwnProperty('asset');
     return {
       ...ind,
-      image: urlFor(hasImage ? ind.image : '')
+      image: urlFor(ind?.image ?? config?.image ?? undefined)
         .width(300)
         .height(300)
         .url()
@@ -60,15 +37,43 @@ const SermonGrid = ({sermons, series}) => {
   });
 
   return (
-    <Grid>
-      <section>
-        <h2>Latest Sermon</h2>
+    <Grid
+      sx={{
+        display: ['block', 'grid'],
+        gap: [null, '5px 20px'],
+        gridTemplateColumns: [null, 'repeat(4, 1fr)'],
+        gridTemplateRows: [null, '50px auto'],
+        gridAutoFlow: 'column'
+      }}
+    >
+      <section
+        sx={{
+          display: 'contents'
+        }}
+      >
+        <Styled.h2 sx={{margin: 0}}>Latest Sermon</Styled.h2>
         <RenderSeriesComponent {...latestSermon} />
       </section>
-      <CurrentSeries seriesData={modseries[0]} loading={!modseries} />
+      <CurrentSeries
+        seriesData={modseries[0]}
+        loading={!modseries}
+        style={{
+          display: 'contents',
+          h2: {
+            margin: 0
+          }
+        }}
+      />
       <RecentSeries
         seriesData={[modseries[1], modseries[2]]}
         loading={!modseries}
+        style={{
+          display: 'contents',
+          h2: {
+            margin: 0,
+            gridColumn: [null, '3/5']
+          }
+        }}
       />
     </Grid>
   );
@@ -76,7 +81,8 @@ const SermonGrid = ({sermons, series}) => {
 
 SermonGrid.propTypes = {
   series: PropTypes.array,
-  sermons: PropTypes.array
+  sermons: PropTypes.array,
+  config: PropTypes.object
 };
 
 export default SermonGrid;

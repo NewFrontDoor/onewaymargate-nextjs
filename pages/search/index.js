@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+/** @jsx jsx */
+import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {jsx} from 'theme-ui';
 import Link from '../../components/link';

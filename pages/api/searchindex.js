@@ -83,7 +83,7 @@ async function fetchMainData() {
       searchbody: page.body
         .map(item => item.children)
         .flat()
-        .map(child => (child ? child.text : ''))
+        .map(child => child?.text ?? '')
         .join(' ')
     };
   });

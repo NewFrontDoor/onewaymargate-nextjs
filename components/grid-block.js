@@ -13,16 +13,23 @@ const gridSx = ({gap, columns, columnRawValue}) => ({
   ]
 });
 
-const GridBlock = props => {
-  const {items, renderProp, marginBottom, style} = props;
+const GridBlock = ({
+  items,
+  renderProp,
+  marginBottom,
+  style,
+  gap,
+  columns,
+  columnRawValue
+}) => {
   return (
-    <div sx={gridSx(props)}>
+    <div sx={gridSx({gap, columns, columnRawValue})}>
       {items.map(item => {
         return item.id ? (
-          <div />
+          <div key={item._key} /> // A blank item, with a name on the property 'id'
         ) : (
           <div
-            key={item._id}
+            key={item._key}
             sx={{
               display: 'grid',
               gridTemplateColumns: '1fr',
@@ -39,12 +46,12 @@ const GridBlock = props => {
 
 GridBlock.propTypes = {
   columnRawValue: PropTypes.number.isRequired,
-  columns: PropTypes.number.isRequired,
-  gap: PropTypes.number,
+  columns: PropTypes.string.isRequired,
+  gap: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      _id: PropTypes.string.isRequired
+      id: PropTypes.string,
+      _key: PropTypes.string.isRequired
     })
   ),
   marginBottom: PropTypes.string,

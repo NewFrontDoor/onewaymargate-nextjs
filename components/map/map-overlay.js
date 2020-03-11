@@ -82,16 +82,14 @@ const MapOverlay = ({heading, details, actions, lat, long}) => {
         </Styled.h2>
       )}
       {details.length > 0 &&
-        details.map(detail => {
-          return (
-            <div key={detail.value} sx={{paddingBottom: '10px'}}>
-              {types[detail.type]}
-              {detail.value}
-            </div>
-          );
-        })}
+        details.map(detail => (
+          <div key={detail.value} sx={{paddingBottom: '10px'}}>
+            {types[detail.type]}
+            {detail.value}
+          </div>
+        ))}
       {actions.length > 0 && (
-        <div sx={containerSx(actions.length)}>
+        <div key="actions" sx={containerSx(actions.length)}>
           {actions.map((link, index) => {
             if (link.name === 'directions') {
               return (

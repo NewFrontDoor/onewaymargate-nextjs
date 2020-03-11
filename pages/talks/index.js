@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import PropTypes from 'prop-types';
-import {jsx} from 'theme-ui';
+import {jsx, Styled} from 'theme-ui';
 import {SermonTable} from '@newfrontdoor/sermon';
 import HomeBlock from '../../components/block-text-serializer';
 import Layout from '../../components/layout';
@@ -11,7 +11,8 @@ import {
   pageQuery,
   menuQuery,
   sermonQuery,
-  seriesQuery
+  seriesQuery,
+  defaultQuery
 } from '../../lib/queries';
 
 const headers = [
@@ -19,7 +20,7 @@ const headers = [
   {heading: 'Series', key: 'series', searchable: true},
   {heading: 'Bible Passage(s)', key: 'book', searchable: true},
   {heading: 'Speaker', key: 'preacher', searchable: true},
-  {heading: 'Date Preached', key: 'date', searchable: false}
+  {heading: 'Date Preached', key: 'date', searchable: false},
 ];
 
 const main = {
@@ -31,14 +32,17 @@ const main = {
   color: '#444444'
 };
 
-const Sermons = ({pageData, sermonData, seriesData, menuData, def}) => {
+const Sermons = ({pageData, sermonData, seriesData, menuData, defaultData}) => {
   const sermonsSubset = sermonData.slice(0, 10);
   return (
     <Layout menuData={menuData} mainData={pageData}>
       <article sx={main}>
         <HomeBlock blocks={pageData.body} />
-
-        <SermonGrid sermons={sermonData} series={seriesData} def={def} />
+        <SermonGrid
+          sermons={sermonData}
+          series={seriesData}
+          config={defaultData}
+        />
         <SermonTable
           sermons={sermonsSubset}
           headers={headers}
@@ -54,11 +58,11 @@ const Sermons = ({pageData, sermonData, seriesData, menuData, def}) => {
 };
 
 Sermons.propTypes = {
-  pageData: PropTypes.array,
-  sermonData: PropTypes.array,
+  pageData: PropTypes.object.isRequired,
+  sermonData: PropTypes.array.isRequired,
   seriesData: PropTypes.array,
-  menuData: PropTypes.object,
-  def: PropTypes.any
+  menuData: PropTypes.object.isRequired,
+  defaultData: PropTypes.object
 };
 
 Sermons.getInitialProps = async () => {
@@ -67,7 +71,8 @@ Sermons.getInitialProps = async () => {
         "menuData": ${menuQuery},
         "pageData": ${pageQuery('talks')},
         "sermonData": ${sermonQuery},
-        "seriesData": ${seriesQuery}
+        "seriesData": ${seriesQuery},
+        "defaultData": ${defaultQuery}
     }`
   );
   return results;

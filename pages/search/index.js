@@ -99,8 +99,6 @@ const Search = ({pageData, menuData}) => {
   return (
     <Layout menuData={menuData} mainData={pageData}>
       <article sx={main}>
-      <p>Hardcoded link below</p>
-      <Link link="talks/array/happy/bob">Link</Link>
         <HomeBlock blocks={pageData.body} />
         <input type="text" value={filter} onChange={handleChange} />
         {results.map(result => (

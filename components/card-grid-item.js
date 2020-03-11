@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import PropTypes from 'prop-types';
-import Link from 'next/link';
+import Link from './link';
 import urlFor from '../lib/sanityImg';
 import BlockText from './block-text-serializer';
 import {jsx, Styled} from 'theme-ui';
@@ -22,58 +22,39 @@ const actionSx = {
   }
 };
 
-const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/;
+const LinkWrapper = ({link, children}) =>
+  link ? (
+    <Link link={link} variant="circle">
+      {children}
+    </Link>
+  ) : (
+    children
+  );
 
 const Card = ({header, description, shortdescription, image, link, action}) => {
   return (
     <div>
-      {regex.test(link) ? (
-        <Link passHref href={`/${link}`}>
-          <a>
-            <img
-              src={urlFor(image)
-                .width(530)
-                .height(135)
-                .auto('format')
-                .url()}
-              alt={header}
-              sx={{gridColumn: '1/1', width: '100%'}}
-            />
-            <Styled.h3
-              sx={{
-                gridColumn: '1/1',
-                maxWidth: '100%',
-                textAlign: 'center',
-                margin: '0.5em'
-              }}
-            >
-              {header}
-            </Styled.h3>
-          </a>
-        </Link>
-      ) : (
-        <a href={link}>
-          <img
-            src={urlFor(image)
-              .width(530)
-              .height(135)
-              .auto('format')
-              .url()}
-            alt={header}
-            sx={{gridColumn: '1/1', width: '100%'}}
-          />
-          <Styled.h3
-            sx={{
-              gridColumn: '1/1',
-              maxWidth: '100%',
-              textAlign: 'center',
-              margin: '0.5em'
-            }}
-          >
-            {header}
-          </Styled.h3>
-        </a>
-      )}
+      <LinkWrapper link={link}>
+        <img
+          src={urlFor(image)
+            .width(530)
+            .height(135)
+            .auto('format')
+            .url()}
+          alt={header}
+          sx={{gridColumn: '1/1', width: '100%'}}
+        />
+        <Styled.h3
+          sx={{
+            gridColumn: '1/1',
+            maxWidth: '100%',
+            textAlign: 'center',
+            margin: '0.5em'
+          }}
+        >
+          {header}
+        </Styled.h3>
+      </LinkWrapper>
       <BlockText blocks={description} />
       {shortdescription && <Styled.p>{shortdescription}</Styled.p>}
       {link && (
@@ -88,8 +69,8 @@ const Card = ({header, description, shortdescription, image, link, action}) => {
             margin: 'auto'
           }}
         >
-          <Link passHref href={regex.test(link) ? '/' + link : link}>
-            <a sx={actionSx}>{action}</a>
+          <Link link={link} passedSx={actionSx}>
+            {action}
           </Link>
         </section>
       )}

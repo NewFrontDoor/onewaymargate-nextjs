@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import React from 'react';
 import BlockContent from '@sanity/block-content-to-react';
-import {Styled, jsx} from 'theme-ui';
-import Link from 'next/link';
+import {Styled} from 'theme-ui';
+import Link from './link';
 import urlFor from '../lib/sanityImg';
 import Form from './form';
 import GridBlock from './grid-block';
@@ -81,14 +81,14 @@ FormSerializer.propTypes = {
 };
 
 const InternalLinkSerializer = ({mark, children}) => (
-  <Link href={`/${mark.slug}`}>
+  <Link link={mark.slug}>
     <Styled.a>{children}</Styled.a>
   </Link>
 );
 
 const ExternalLinkSerializer = ({mark, children}) => (
-  <Link passHref href={mark.href} prefetch={false}>
-    <Styled.a>{children}</Styled.a>
+  <Link link={mark.href}>
+    {children}
   </Link>
 );
 

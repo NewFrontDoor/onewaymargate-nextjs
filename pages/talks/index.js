@@ -5,7 +5,7 @@ import {SermonTable} from '@newfrontdoor/sermon';
 import HomeBlock from '../../components/block-text-serializer';
 import Layout from '../../components/layout';
 import {fetchQuery} from '../../lib/sanity';
-import Link from 'next/link';
+import Link from '../../components/link';
 import SermonGrid from '../../components/sermon-grid';
 import {
   pageQuery,
@@ -49,7 +49,7 @@ const Sermons = ({pageData, sermonData, seriesData, menuData, defaultData}) => {
           columnHide={[5]}
           sermonDirectory="talks"
           renderLink={(directory, slug, title) => (
-            <Link href={`${directory}/${slug}`}><Styled.a>{title}</Styled.a></Link>
+            <Link link={`${directory}/${slug}`}>{title}</Link> // NEED FIX
           )}
         />
       </article>

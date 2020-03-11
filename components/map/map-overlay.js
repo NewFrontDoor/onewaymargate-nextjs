@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import PropTypes from 'prop-types';
-import Link from 'next/link';
+import Link from '../link';
 import {ReactComponent as ClockIcon} from './clock.svg';
 import {ReactComponent as EmailIcon} from './email.svg';
 import {ReactComponent as LocIcon} from './location.svg';
@@ -54,12 +54,10 @@ const types = {
 
 const MapLink = ({url, children, column}) => {
   return (
-    <Link passHref href={url}>
-      <a sx={{display: 'contents', textDecoration: 'none'}}>
-        <Button variant="map" sx={{gridColumnStart: [column + 1, column + 2]}}>
-          {children}
-        </Button>
-      </a>
+    <Link noAnchor variant="circle" link={url}>
+      <Button variant="map" sx={{gridColumnStart: [column + 1, column + 2]}}>
+        {children}
+      </Button>
     </Link>
   );
 };
@@ -107,7 +105,7 @@ const MapOverlay = ({heading, details, actions, lat, long}) => {
 
             if (link.name === 'pagereference') {
               return (
-                <MapLink key={link.url} column={index} url={`/${link.url}`}>
+                <MapLink key={link.url} column={index} url={link.url}>
                   {link.label}
                 </MapLink>
               );

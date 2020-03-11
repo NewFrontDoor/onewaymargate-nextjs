@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import urlFor from '../lib/sanityImg';
 import PropTypes from 'prop-types';
-import Link from 'next/link';
+import Link from './link';
 import {jsx, Styled} from 'theme-ui';
 
 const headerSx = {
@@ -22,54 +22,30 @@ const shadedOverlay = {
   zIndex: '19'
 };
 
-const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/;
-
-const Overlay = ({header, image, link, slug}) =>
-  !link && !slug ? (
-    <div sx={{display: 'contents'}}>
-      <img
-        src={urlFor(image)
-          .width(350)
-          .height(350)
-          .auto('format')
-          .url()}
-        alt={header}
-        sx={{gridRow: '1/1', gridColumn: '1/1', width: '100%'}}
-      />
-      <div sx={shadedOverlay} />
-      <Styled.h5 sx={headerSx}>{header}</Styled.h5>
-    </div>
-  ) : regex.test(link || slug) ? (
-    <Link passHref href={`/${link || slug.current}`}>
-      <a sx={{display: 'contents'}}>
-        <img
-          src={urlFor(image)
-            .width(350)
-            .height(350)
-            .auto('format')
-            .url()}
-          alt={header}
-          sx={{gridRow: '1/1', gridColumn: '1/1', width: '100%'}}
-        />
-        <div sx={shadedOverlay} />
-        <Styled.h5 sx={headerSx}>{header}</Styled.h5>
-      </a>
+const LinkWrapper = ({link, children}) =>
+  link ? (
+    <Link link={link} variant="circle">
+      {children}
     </Link>
   ) : (
-    <Styled.a sx={{display: 'contents'}} href={link}>
-      <img
-        src={urlFor(image)
-          .width(350)
-          .height(350)
-          .auto('format')
-          .url()}
-        alt={header}
-        sx={{gridRow: '1/1', gridColumn: '1/1', width: '100%'}}
-      />
-      <div sx={shadedOverlay} />
-      <Styled.h5 sx={headerSx}>{header}</Styled.h5>
-    </Styled.a>
+    <div sx={{display: 'contents'}}>{children}</div>
   );
+
+const Overlay = ({header, image, link, slug}) => (
+  <LinkWrapper link={link || slug?.current}>
+    <img
+      src={urlFor(image)
+        .width(350)
+        .height(350)
+        .auto('format')
+        .url()}
+      alt={header}
+      sx={{gridRow: '1/1', gridColumn: '1/1', width: '100%'}}
+    />
+    <div sx={shadedOverlay} />
+    <Styled.h5 sx={headerSx}>{header}</Styled.h5>
+  </LinkWrapper>
+);
 
 Overlay.propTypes = {
   header: PropTypes.string.isRequired,

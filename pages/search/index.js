@@ -2,7 +2,7 @@
 import {useState} from 'react';
 import PropTypes from 'prop-types';
 import {jsx} from 'theme-ui';
-import Link from 'next/link';
+import Link from '../../components/link';
 import {useQuery} from 'react-query';
 import ky from 'ky-universal';
 import HomeBlock from '../../components/block-text-serializer';
@@ -104,7 +104,9 @@ const Search = ({pageData, menuData}) => {
         {results.map(result => (
           <div key={result._id}>
             <Link
-              href={result.pathname ? result.pathname : 'talks/' + result.slug}
+              link={
+                result._type === 'page' ? result.slug : 'talks/' + result.slug
+              }
             >
               <h1>{result.title}</h1>
             </Link>

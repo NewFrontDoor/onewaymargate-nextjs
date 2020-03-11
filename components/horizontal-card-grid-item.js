@@ -1,23 +1,17 @@
 /** @jsx jsx */
 import PropTypes from 'prop-types';
-import Link from 'next/link';
+import Link from './link';
 import BlockText from './block-text-serializer';
 import urlFor from '../lib/sanityImg';
 import {jsx, Styled} from 'theme-ui';
 
-const regex = /^(?!www\.|(?:http|ftp)s?:\/\/|[A-Za-z]:\\|\/\/).*/;
-
 const LinkWrapper = ({link, slug, children}) =>
-  !link && !slug ? (
-    <>{children}</>
-  ) : regex.test(link || slug) ? (
-    <Link passHref href={`/${link || slug.current}`}>
-      <Styled.a sx={{display: 'contents', color: 'text'}}>{children}</Styled.a>
+  link || slug ? (
+    <Link link={link || slug.current} variant="circle">
+      {children}
     </Link>
   ) : (
-    <Styled.a href={link} sx={{display: 'contents', color: 'text'}}>
-      {children}
-    </Styled.a>
+    children
   );
 
 LinkWrapper.propTypes = {

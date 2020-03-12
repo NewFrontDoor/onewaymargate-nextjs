@@ -11,6 +11,7 @@
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.12",
     "@newfrontdoor/audio-player": "0.1.8",
+    "@newfrontdoor/form": "^0.2.1",
     "@newfrontdoor/search": "^0.2.0",
     "@newfrontdoor/sermon": "^0.5.5",
     "@react-google-maps/api": "^1.5.1",

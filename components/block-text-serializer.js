@@ -4,7 +4,7 @@ import BlockContent from '@sanity/block-content-to-react';
 import {Styled, jsx} from 'theme-ui';
 import Link from './link';
 import urlFor from '../lib/sanityImg';
-import Form from './form';
+import {Form} from '@newfrontdoor/form';
 import GridBlock from './grid-block';
 import Card from './card-grid-item';
 import HorizontalCard from './horizontal-card-grid-item';
@@ -73,7 +73,13 @@ GridBlockSerializer.propTypes = {
 };
 
 const FormSerializer = ({node}) => {
-  return <Form {...node} />;
+  return (
+    <Form
+      {...node}
+      blockText={val => <BlockText blocks={val} />}
+      submitForm={() => console.log('submitted!')}
+    />
+  );
 };
 
 FormSerializer.propTypes = {
@@ -87,9 +93,7 @@ const InternalLinkSerializer = ({mark, children}) => (
 );
 
 const ExternalLinkSerializer = ({mark, children}) => (
-  <Link link={mark.href}>
-    {children}
-  </Link>
+  <Link link={mark.href}>{children}</Link>
 );
 
 InternalLinkSerializer.propTypes = {

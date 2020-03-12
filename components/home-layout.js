@@ -6,7 +6,7 @@ import urlFor from '../lib/sanityImg';
 import BlockText from './block-text-serializer';
 import Action from './action-button';
 import Arrow from './arrow';
-import {getColor} from '../lib/color-functions';
+import {getColor} from '../theme';
 
 const overlayColors = {
   blue: '#007dc5',

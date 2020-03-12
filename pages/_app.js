@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import App from 'next/app';
 import {ThemeProvider, Styled} from 'theme-ui';
-import theme from '../lib/theme';
+import theme from '../theme';
 require('typeface-noto-serif'); //eslint-disable-line
 require('typeface-rubik'); //eslint-disable-line
 

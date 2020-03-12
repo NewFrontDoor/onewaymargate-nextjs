@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import Link from './link';
 import {jsx} from 'theme-ui';
-import {getColor} from '../lib/color-functions';
+import {getColor} from '../theme';
 
 const actionStyles = ({column, displaystyle}) => ({
   display: 'flex',

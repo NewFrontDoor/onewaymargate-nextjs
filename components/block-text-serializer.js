@@ -77,6 +77,7 @@ const FormSerializer = ({node}) => {
     <Form
       {...node}
       validations={values => {
+        const errorMessage = node.requiredError;
         const errors = {};
         node.fields.forEach(field => {
           const rg = field.regex?.regexString
@@ -84,7 +85,7 @@ const FormSerializer = ({node}) => {
             : false;
           if (field.required) {
             if (!values[field.id]) {
-              errors[field.id] = 'Required';
+              errors[field.id] = errorMessage || 'Required';
             } else if (rg && !rg.test(values[field.id])) {
               errors[field.id] = field.regex.warning;
             }

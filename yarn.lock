@@ -1546,15 +1546,14 @@
   resolved "https://registry.yarnpkg.com/@newfrontdoor/base/-/base-0.1.2.tgz#e1a1423442e7f13738a13337e4c58e9ed16be2b6"
   integrity sha512-f6P6NUw6oz/jeJmKYOZIx8BJgaSjnr3MKN5uu+SzWuav2BP7rRe66NBAnnLCM30jUrVnZSb6GoZMhc3vmV/pqA==
 
-"@newfrontdoor/form@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@newfrontdoor/form/-/form-0.2.1.tgz#e8907feaa78a5f2b80da312cd42099164acf1b8e"
-  integrity sha512-VV+3CnQeuvKSAQ7uAZlQwcgyj9NFjjRQtpOhNzbsPL3RQLKjzRFlnGIMrBpjTe8Ikhl27W6u28ojw9YgXYACsQ==
+"@newfrontdoor/form@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@newfrontdoor/form/-/form-0.3.2.tgz#ee08aadd7bb20236feae795d4fa02077612e7a5b"
+  integrity sha512-h4XB5ys5pqnlVYXne9T9lDH3dJANZ1RSbCzf873FDEAHTksbZmys2soEzowcG+QqI/gwDCtM47W4LyYslCRpEA==
   dependencies:
     final-form "^4.18.7"
     prop-types "^15.6.0"
     react-final-form "^6.3.5"
-    react-global-configuration "^1.3.0"
 
 "@newfrontdoor/search@^0.2.0":
   version "0.2.0"

@@ -4,7 +4,7 @@ import BlockContent from '@sanity/block-content-to-react';
 import {Styled, jsx} from 'theme-ui';
 import Link from './link';
 import urlFor from '../lib/sanityImg';
-import {Form} from '@newfrontdoor/form';
+import {Form, validation} from '@newfrontdoor/form';
 import GridBlock from './grid-block';
 import Card from './card-grid-item';
 import HorizontalCard from './horizontal-card-grid-item';
@@ -76,25 +76,7 @@ const FormSerializer = ({node}) => {
   return (
     <Form
       {...node}
-      validations={values => {
-        const errorMessage = node.requiredError;
-        const errors = {};
-        node.fields.forEach(field => {
-          const rg = field.regex?.regexString
-            ? new RegExp(field.regex.regexString, 'i')
-            : false;
-          if (field.required) {
-            if (!values[field.id]) {
-              errors[field.id] = errorMessage || 'Required';
-            } else if (rg && !rg.test(values[field.id])) {
-              errors[field.id] = field.regex.warning;
-            }
-          } else if (rg && values[field.id] && !rg.test(values[field.id])) {
-            errors[field.id] = field.regex.warning;
-          }
-        });
-        return errors;
-      }}
+      validationFn={values => validation(values, node)}
       blockText={val => <BlockText blocks={val} />}
       submitForm={() => console.log('submitted!')}
     />

@@ -4,7 +4,7 @@ export default {
     textTransform: 'uppercase',
     fontFamily: 'body',
     fontWeight: 'bold',
-    color: 'background',
+    color: 'inherit',
     cursor: 'pointer',
     '&:hover': {
       color: 'accent'

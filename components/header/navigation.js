@@ -81,7 +81,7 @@ const Navigation = ({navlinks}) => {
         <div sx={search}>
           <Link link="search">
             <SearchIcon
-              fill="white"
+              fill="inherit"
               sx={{
                 ':hover': {
                   fill: 'accent'

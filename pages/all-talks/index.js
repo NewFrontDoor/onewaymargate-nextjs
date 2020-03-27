@@ -15,7 +15,7 @@ const headers = [
   {heading: 'Series', key: 'series', searchable: true},
   {heading: 'Bible Passage(s)', key: 'book', searchable: true},
   {heading: 'Speaker', key: 'preacher', searchable: true},
-  {heading: 'Date Preached', key: 'date', searchable: false}
+  {heading: 'Date Preached', key: 'preachedDate', searchable: false, hideable: true}
 ];
 
 const main = {
@@ -36,7 +36,7 @@ const AllSermons = ({pageData, menuData, sermonData}) => {
         <SermonFilter
           dataCollection={sermonData}
           setSubset={setSubset}
-          headers={headers}
+          fields={headers}
           labels={{
             searchbox: 'Filter sermons:',
             checkbox: `use 'inclusive' mode`

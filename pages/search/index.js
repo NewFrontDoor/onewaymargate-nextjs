@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import {useState} from 'react';
 import PropTypes from 'prop-types';
-import {jsx} from 'theme-ui';
+import {jsx, Input} from 'theme-ui';
 import Link from '../../components/link';
 import {useQuery} from 'react-query';
 import ky from 'ky-universal';
@@ -100,7 +100,12 @@ const Search = ({pageData, menuData}) => {
     <Layout menuData={menuData} mainData={pageData}>
       <article sx={main}>
         <HomeBlock blocks={pageData.body} />
-        <input type="text" value={filter} onChange={handleChange} />
+        <Input
+          type="text"
+          value={filter}
+          onChange={handleChange}
+          sx={{marginBottom: '30px'}}
+        />
         {results.map(result => (
           <div key={result._id}>
             <Link

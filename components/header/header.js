@@ -3,17 +3,20 @@ import PropTypes from 'prop-types';
 import {jsx} from 'theme-ui';
 import Link from '../link';
 import Head from 'next/head';
+import {useRouter} from 'next/router';
 import useWindowScroll from '@react-hook/window-scroll';
 import {ReactComponent as Logo} from '../../public/OneWay.svg';
 import Navigation from './navigation';
 
-const navSx = offset => ({
+const navSx = (offset, initialFill) => ({
   zIndex: 1000,
   position: 'fixed',
   top: 0,
   width: '100vw',
   padding: [0, 0, '0.8em 0'],
-  backgroundColor: [null, null, `rgb(59, 139, 235, ${offset / 50})`]
+  backgroundColor: [null, null, `rgb(59, 139, 235, ${offset / 50})`],
+  color: initialFill,
+  fill: initialFill
 });
 
 const navInnerSx = {
@@ -28,8 +31,14 @@ const navInnerSx = {
 
 const Header = ({navlinks}) => {
   const offset = useWindowScroll(60);
+  const router = useRouter();
+  const initialFill =
+    router.pathname === '/'
+      ? `rgb(${offset * 8.5}, ${offset * 8.5}, ${offset * 8.5})`
+      : 'white';
+
   return (
-    <nav sx={navSx(offset)}>
+    <nav sx={navSx(offset, initialFill)}>
       <Head>
         <link
           rel="apple-touch-icon"
@@ -71,11 +80,11 @@ const Header = ({navlinks}) => {
               height: ['70px', '100px'],
               width: 'auto',
               display: 'inline-block',
-              fill: 'white'
+              fill: 'inherit'
             }}
           />
         </Link>
-        <Navigation navlinks={navlinks} offset={offset} />
+        <Navigation navlinks={navlinks} />
       </div>
     </nav>
   );

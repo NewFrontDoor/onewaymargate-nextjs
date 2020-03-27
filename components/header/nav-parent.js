@@ -12,7 +12,6 @@ const listItem = {
     opacity: '1',
     display: 'block'
   },
-  color: ['text', 'text', 'background'],
   margin: [null, null, '0.3125em 0 -1rem 1.25em'],
   paddingBottom: [null, null, '1rem']
 };

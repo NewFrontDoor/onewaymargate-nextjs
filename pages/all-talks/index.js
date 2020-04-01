@@ -23,7 +23,8 @@ const main = {
   margin: 'auto',
   fontSize: '1.15em',
   lineHeight: '1.8',
-  color: '#444444'
+  color: '#444444',
+  textAlign: 'left'
 };
 
 const AllSermons = ({pageData, menuData, sermonData}) => {

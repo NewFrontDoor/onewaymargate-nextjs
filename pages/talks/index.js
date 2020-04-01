@@ -20,7 +20,7 @@ const headers = [
   {heading: 'Series', key: 'series', searchable: true},
   {heading: 'Bible Passage(s)', key: 'book', searchable: true},
   {heading: 'Speaker', key: 'preacher', searchable: true},
-  {heading: 'Date Preached', key: 'date', searchable: false},
+  {heading: 'Date Preached', key: 'preachedDate', searchable: false}
 ];
 
 const main = {
@@ -29,7 +29,8 @@ const main = {
   margin: 'auto',
   fontSize: '1.15em',
   lineHeight: '1.8',
-  color: '#444444'
+  color: '#444444',
+  textAlign: 'left'
 };
 
 const Sermons = ({pageData, sermonData, seriesData, menuData, defaultData}) => {

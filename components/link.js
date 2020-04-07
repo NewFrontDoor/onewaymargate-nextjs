@@ -62,7 +62,7 @@ const Link = ({
 Link.propTypes = {
   children: PropTypes.any,
   variant: PropTypes.string,
-  link: PropTypes.string.isRequired,
+  link: PropTypes.string,
   isBlank: PropTypes.bool,
   hasNoAnchor: PropTypes.bool,
   passedSx: PropTypes.object

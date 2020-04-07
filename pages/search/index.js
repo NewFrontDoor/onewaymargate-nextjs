@@ -103,8 +103,8 @@ const Search = ({pageData, menuData}) => {
         <Input
           type="text"
           value={filter}
-          onChange={handleChange}
           sx={{marginBottom: '30px'}}
+          onChange={handleChange}
         />
         {results.map(result => (
           <div key={result._id}>

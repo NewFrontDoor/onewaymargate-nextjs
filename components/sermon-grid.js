@@ -41,9 +41,9 @@ const SermonGrid = ({sermons, series, config}) => {
       sx={{
         display: ['block', 'grid'],
         gap: [null, '5px 20px'],
-        gridTemplateColumns: [null, 'repeat(4, 1fr)'],
+        gridTemplateColumns: [null, 'repeat(3, 1fr)'],
         gridTemplateRows: [null, '50px auto'],
-        gridAutoFlow: 'column'
+        gridAutoFlow: 'column',
       }}
     >
       <section

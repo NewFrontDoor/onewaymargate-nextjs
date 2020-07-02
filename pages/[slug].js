@@ -7,7 +7,7 @@ import {menuQuery, pageQuery} from '../lib/queries';
 import {jsx} from 'theme-ui';
 
 const main = gridblock => ({
-  maxWidth: gridblock > 0 ? '1200px' : '700px',
+  maxWidth: gridblock ? '1200px' : '700px',
   margin: 'auto',
   padding: '15px',
   fontSize: '1.15em',
@@ -17,15 +17,14 @@ const main = gridblock => ({
 const Page = ({menuData, mainData}) => {
   const {body} = mainData;
 
+  const hasGridblock =
+    body.filter(obj => {
+      return obj._type === 'gridblock';
+    }).length > 0;
+
   return (
     <Layout menuData={menuData} mainData={mainData}>
-      <article
-        sx={main(
-          body.filter(obj => {
-            return obj._type === 'gridblock';
-          }).length
-        )}
-      >
+      <article sx={main(hasGridblock)}>
         <SanityBlock blocks={body} />
       </article>
     </Layout>

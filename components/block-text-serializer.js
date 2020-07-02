@@ -87,6 +87,12 @@ FormSerializer.propTypes = {
   node: PropTypes.object.isRequired
 };
 
+const AssetSerializer = ({mark, children}) => (
+  <a href={mark.url}>
+    <Styled.a>{children}</Styled.a>
+  </a>
+);
+
 const InternalLinkSerializer = ({mark, children}) => (
   <Link link={mark.slug}>
     <Styled.a>{children}</Styled.a>
@@ -96,6 +102,13 @@ const InternalLinkSerializer = ({mark, children}) => (
 const ExternalLinkSerializer = ({mark, children}) => (
   <Link link={mark.href}>{children}</Link>
 );
+
+AssetSerializer.propTypes = {
+  children: PropTypes.array.isRequired,
+  mark: PropTypes.shape({
+    url: PropTypes.string
+  }).isRequired
+};
 
 InternalLinkSerializer.propTypes = {
   children: PropTypes.array.isRequired,
@@ -158,7 +171,8 @@ const BlockText = ({blocks}) => {
         marks: {
           anchor: AnchorSerializer,
           internalLink: InternalLinkSerializer,
-          link: ExternalLinkSerializer
+          link: ExternalLinkSerializer,
+          asset: AssetSerializer
         }
       }}
     />

@@ -32,7 +32,7 @@ const MapLayout = ({heading, actions, details, location}) => {
       <div sx={homeMapInner}>
         <LoadScript
           id="script-loader"
-          googleMapsApiKey={process.env.GOOGLE_MAPS_API}
+          googleMapsApiKey={process.env.ONEWAY_GMAP_API}
         >
           <GoogleMap
             mapContainerStyle={{

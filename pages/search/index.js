@@ -47,7 +47,7 @@ const flex = new FlexSearch({
 
 async function retrieveIndexes(url) {
   let prefix;
-  process.env.NODE_ENV === "development" ? prefix = 'http://localhost:3000' : prefix = 'https://onewaymargate.org';
+  process.env.NODE_ENV === "development" ? prefix = 'http://localhost:3000' : prefix = 'https://www.onewaymargate.org';
   const data = await ky(url, { prefixUrl: prefix }).json();
 
   await flex.import(data.mainIndexExport);

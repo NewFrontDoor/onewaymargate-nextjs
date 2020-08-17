@@ -1,15 +1,15 @@
 /** @jsx jsx */
-import {useState} from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
-import {jsx, Input} from 'theme-ui';
+import { jsx, Input } from 'theme-ui';
 import Link from '../../components/link';
-import {useQuery} from 'react-query';
+import { useQuery } from 'react-query';
 import ky from 'ky-universal';
 import HomeBlock from '../../components/block-text-serializer';
 import FlexSearch from 'flexsearch';
 import Layout from '../../components/layout';
-import {fetchQuery} from '../../lib/sanity';
-import {menuQuery, pageQuery} from '../../lib/queries';
+import { fetchQuery } from '../../lib/sanity';
+import { menuQuery, pageQuery } from '../../lib/queries';
 
 const main = {
   maxWidth: '700px',
@@ -47,8 +47,8 @@ const flex = new FlexSearch({
 
 async function retrieveIndexes(url) {
   let prefix;
-  process.env.NODE_ENV === "development" ? prefix = 'http://localhost:3000' : prefix = 'http://onewaymargate.org';
-  const data = await ky(url, {prefixUrl: prefix}).json();
+  process.env.NODE_ENV === "development" ? prefix = 'http://localhost:3000' : prefix = 'https://onewaymargate.org';
+  const data = await ky(url, { prefixUrl: prefix }).json();
 
   await flex.import(data.mainIndexExport);
   await sermonflex.import(data.sermonIndexExport);
@@ -79,8 +79,8 @@ async function retrieveIndexes(url) {
 }
 
 function useSearchIndex(filter) {
-  const {data: index} = useQuery('api/searchindex', retrieveIndexes);
-  const {data: results} = useQuery(filter, filter => {
+  const { data: index } = useQuery('api/searchindex', retrieveIndexes);
+  const { data: results } = useQuery(filter, filter => {
     if (index) {
       return index.query(filter);
     }
@@ -89,7 +89,7 @@ function useSearchIndex(filter) {
   return results || [];
 }
 
-const Search = ({pageData, menuData}) => {
+const Search = ({ pageData, menuData }) => {
   const [filter, setFilter] = useState('');
   const results = useSearchIndex(filter);
 
@@ -105,7 +105,7 @@ const Search = ({pageData, menuData}) => {
         <Input
           type="text"
           value={filter}
-          sx={{marginBottom: '30px'}}
+          sx={{ marginBottom: '30px' }}
           onChange={handleChange}
         />
         {results.map(result => (
@@ -120,12 +120,12 @@ const Search = ({pageData, menuData}) => {
             {result.searchbody ? (
               <p>{result.searchbody.slice(0, 100)}...</p>
             ) : (
-              <p>
-                {result.series} - {result.preacher}
-                <br />
-                {result.book}
-              </p>
-            )}
+                <p>
+                  {result.series} - {result.preacher}
+                  <br />
+                  {result.book}
+                </p>
+              )}
           </div>
         ))}
       </article>

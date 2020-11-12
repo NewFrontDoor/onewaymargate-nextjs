@@ -23,6 +23,7 @@
     "@theme-ui/style-guide": "^0.3.0",
     "@zeit/next-css": "^1.0.1",
     "babel-plugin-inline-react-svg": "^1.1.1",
+    "cors": "^2.8.5",
     "emotion-theming": "^10.0.10",
     "flexsearch": "^0.6.30",
     "ky": "^0.18.0",

@@ -43,7 +43,9 @@ function initMiddleware(middleware) {
 export default async function(req, res) {
   await corsMiddleware(req, res);
   const name = req.body.name;
+  console.log(req.body.type);
   const contentType = mime.getType(name);
+  console.log(contentType);
   const key = `${cryptoRandomString({length: 16, type: 'url-safe'})}_${name}`;
   const bucket = 'sermons.onewaymargate.org';
 

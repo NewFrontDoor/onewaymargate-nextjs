@@ -29,6 +29,7 @@
     "flexsearch": "^0.6.30",
     "ky": "^0.18.0",
     "ky-universal": "^0.5.0",
+    "mime": "^2.4.6",
     "next": "^9.5.2",
     "next-compose-plugins": "^2.2.0",
     "next-fonts": "^1.0.3",

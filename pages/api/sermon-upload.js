@@ -4,7 +4,10 @@ import cors from 'cors';
 import cryptoRandomString from 'crypto-random-string';
 
 const createPresignedPost = params => {
-  const s3 = new S3({region: 'us-west-2'}); // Set the region according to the bucket's needs
+  const s3 = new S3({
+    region: 'us-west-2',
+    signatureVersion: 'v4'
+  }); // Set the region according to the bucket's needs
 
   return new Promise((resolve, reject) => {
     s3.createPresignedPost(params, (err, data) => {

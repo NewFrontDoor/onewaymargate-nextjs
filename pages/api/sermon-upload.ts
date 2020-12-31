@@ -1,7 +1,7 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import {NextApiRequest, NextApiResponse} from 'next';
 import cors from 'cors';
 import initMiddleware from '@newfrontdoor/init-middleware';
-import { presignedPost } from '@newfrontdoor/api-create-presigned-post';
+import {presignedPost} from '@newfrontdoor/api-create-presigned-post';
 
 const origin =
   process.env.NODE_ENV === 'production'

@@ -48,7 +48,7 @@ const sermonQuery = `
     "series": series->title,
     "book": passage,
     "image": series->image,
-    "url": "https://s3.us-west-2.amazonaws.com/sermons.onewaymargate.org/" + file,
+    "url": "https://sermons.onewaymargate.org/" + file,
     "slug": slug.current
   } | order(preachedDate desc)
   `;

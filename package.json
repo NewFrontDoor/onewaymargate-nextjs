@@ -10,8 +10,10 @@
   "dependencies": {
     "@emotion/core": "^10.0.10",
     "@emotion/styled": "^10.0.12",
+    "@newfrontdoor/api-create-presigned-post": "^0.2.1",
     "@newfrontdoor/audio-player": "0.1.8",
     "@newfrontdoor/form": "^0.5.6",
+    "@newfrontdoor/init-middleware": "^0.2.0",
     "@newfrontdoor/search": "^0.3.1",
     "@newfrontdoor/sermon": "^0.5.6",
     "@react-google-maps/api": "^1.5.1",
@@ -49,6 +51,7 @@
     "typeface-rubik": "^0.0.72"
   },
   "devDependencies": {
+    "@types/react": "^17.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "6.8.0",
     "eslint-config-xo-react": "0.23.0",
@@ -58,6 +61,7 @@
     "prettier": "^1.18.2",
     "prop-types": "^15.7.2",
     "react-scripts": "^3.0.1",
+    "typescript": "^4.1.2",
     "xo": "0.27.2"
   },
   "xo": {

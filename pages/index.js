@@ -11,7 +11,7 @@ import { mainQuery, menuQuery } from "../lib/queries";
 const Home = ({ mainData, menuData }) => {
 	const { content } = mainData;
 	return (
-		<div>
+		<html lang="en">
 			<Head>
 				<title>Home | One Way Christian Church Margate</title>
 				<meta
@@ -28,7 +28,7 @@ const Home = ({ mainData, menuData }) => {
 				return <HomeLayout key={segment.heading} {...segment} isFirstPage={index === 0} />;
 			})}
 			<Footer />
-		</div>
+		</html>
 	);
 };
 

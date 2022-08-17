@@ -7,7 +7,7 @@ import Head from "next/head";
 
 const Layout = ({ menuData, mainData, children }) => {
 	return (
-		<div>
+		<html lang="en">
 			<Head>
 				<title>{mainData.title} | One Way Christian Church Margate</title>
 				<meta
@@ -19,7 +19,7 @@ const Layout = ({ menuData, mainData, children }) => {
 			<Banner data={mainData} />
 			{children}
 			<Footer />
-		</div>
+		</html>
 	);
 };
 

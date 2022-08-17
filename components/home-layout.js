@@ -75,6 +75,7 @@ const HomeLayout = (props) => {
 				sx={{ ...imageStyle, opacity: opacities[styling.style] }}
 				style={fade}
 				onLoad={() => set({ opacity: 0.15 })}
+				alt=""
 			/>
 			<div sx={homeSection(props)}>
 				<div sx={homeSectionInner}>

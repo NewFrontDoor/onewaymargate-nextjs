@@ -7,15 +7,19 @@ import Head from "next/head";
 
 const Layout = ({ menuData, mainData, children }) => {
 	return (
-		<div>
+		<html lang="en">
 			<Head>
-				<title>One Way Margate - {mainData.title}</title>
+				<title>{mainData.title} | One Way Christian Church Margate</title>
+				<meta
+					name="description"
+					content="One Way Christian Church is located in Margate, Tasmania. Our vision is to see the people of Margate, the Channel and beyond come to know Jesus Christ."
+				/>
 			</Head>
 			<Header navlinks={menuData.menuitems} />
 			<Banner data={mainData} />
 			{children}
 			<Footer />
-		</div>
+		</html>
 	);
 };
 

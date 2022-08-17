@@ -75,6 +75,7 @@ const HomeLayout = (props) => {
 				sx={{ ...imageStyle, opacity: opacities[styling.style] }}
 				style={fade}
 				onLoad={() => set({ opacity: 0.15 })}
+				alt=""
 			/>
 			<div sx={homeSection(props)}>
 				<div sx={homeSectionInner}>
@@ -87,7 +88,6 @@ const HomeLayout = (props) => {
 					{actions && (
 						<div sx={containerSx(actions.length)}>
 							{actions.map((link, index) => {
-								console.log(link);
 								if (link.dynamicLink === "latest-sermon") {
 									link.url = `talks/${link.latestSermonSlug}`;
 								}

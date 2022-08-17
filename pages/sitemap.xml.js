@@ -25,9 +25,15 @@ export async function getServerSideProps({ req, res }) {
 	const { pages, menuData, hostname } = data;
 
 	const updatedWeekly = new Set(["talks", "all-talks"]);
-
+	//Add urls for homepage and other pages to the sitemap
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+		<url>
+            <loc>${protocol}${hostname}</loc>
+            <lastmod>${new Date(menuData._updatedAt).toISOString()}</lastmod>
+            <changefreq>monthly</changefreq>
+            <priority>1.0</priority>
+		</url>
     ${pages
 			.map((page) => {
 				return `

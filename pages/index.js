@@ -13,7 +13,11 @@ const Home = ({ mainData, menuData }) => {
 	return (
 		<div>
 			<Head>
-				<title>One Way Margate - Home</title>
+				<title>Home | One Way Christian Church Margate</title>
+				<meta
+					name="description"
+					content="One Way Christian Church is located in Margate, Tasmania. Our vision is to see the people of Margate, the Channel and beyond come to know Jesus Christ."
+				/>
 			</Head>
 			<Header navlinks={menuData.menuitems} />
 			{content.map((segment, index) => {

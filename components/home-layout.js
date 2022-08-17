@@ -87,7 +87,6 @@ const HomeLayout = (props) => {
 					{actions && (
 						<div sx={containerSx(actions.length)}>
 							{actions.map((link, index) => {
-								console.log(link);
 								if (link.dynamicLink === "latest-sermon") {
 									link.url = `talks/${link.latestSermonSlug}`;
 								}
